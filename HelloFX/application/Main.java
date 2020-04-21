@@ -1,26 +1,18 @@
 package application;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.List;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -33,31 +25,57 @@ public class Main extends Application {
 
     private static final int WINDOW_WIDTH = 300;
     private static final int WINDOW_HEIGHT = 200;
-    private static final String APP_TITLE = "CS400 My First JavaFX Program";
+    private static final String APP_TITLE = "MILK WEIGHT PROGRAM";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         args = this.getParameters().getRaw();
+        Label progLabel = new Label("MILK WEIGHT PROGRAM");
+        progLabel.setFont(new Font("Arial", 30));
         BorderPane root = new BorderPane();
         
-        String week_days[] = { "Apples", "Oranges", "Bananas", "Pears", "Peaches" }; 
-        ComboBox combo_box = new ComboBox(FXCollections.observableArrayList(week_days)); 
+        //LEFT PANE COMPONENTS 
+        /*
+         * creates a VBox object (vertical box) to add multiple HBox components.
+         * HBox lets you add elements in a row, and VBox lets you add multiple elements in
+         * a column 
+         */
+        VBox leftCol = new VBox();
+        HBox leftRow1 = new HBox();
+        Label queryLabel = new Label("QUERY TYPE: ");
+        String week_days[] = { "Farm", "Annual", "Monthly", "Date Range"}; 
+        ComboBox query_type = new ComboBox(FXCollections.observableArrayList(week_days));
+        leftRow1.getChildren().addAll(queryLabel, query_type);
+        HBox leftRow2 = new HBox();
+        Label inputLabel = new Label("INPUT DATA: ");
+        TextField data = new TextField("input data here..."); 
+        leftRow2.getChildren().addAll(inputLabel, data);
+        leftCol.getChildren().addAll(leftRow1, leftRow2);
         
-        Image doggie = new Image("doggie.jpg");
-        ImageView img = new ImageView(doggie);
-        img.setFitHeight(300);
-        img.setFitWidth(300);
+        //RIGHT PANE COMPONENTS
+        VBox rightCol = new VBox();
+        RadioButton rb1 = new RadioButton("ADD DATA");
+        RadioButton rb2 = new RadioButton("REMOVE DATA");
+        HBox rightRow1 = new HBox();
+        Label dataTypeLabel = new Label("DATA TYPE: ");
+        String data_types[] = { "File", "Entry"}; 
+        ComboBox data_type = new ComboBox(FXCollections.observableArrayList(data_types));
+        rightRow1.getChildren().addAll(dataTypeLabel, data_type);
+        HBox rightRow2 = new HBox();
+        rightRow2.getChildren().addAll(inputLabel, data);
+        rightCol.getChildren().addAll(rb1, rb2, rightRow1, rightRow2);
+
         
-        Button btn = new Button("Done");
+        
+        
         
         
         CheckBox cb1 = new CheckBox("Check if you are having fun!");
         
-        root.setTop(new Label("CS400 My First JavaFX Program"));
-        root.setLeft(combo_box);
-        root.setCenter(img);
-        root.setBottom(btn);
-        root.setRight(cb1);
+        root.setTop(progLabel);
+        root.setAlignment(progLabel,Pos.CENTER);
+        root.setLeft(leftCol);
+        root.setRight(rightCol);
         
         
         
