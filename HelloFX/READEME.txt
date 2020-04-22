@@ -1,0 +1,19 @@
+README
+
+Course: cs400
+Semester: Spring 2020
+Project name: Milk Weight
+Team Members:
+1. Prafull Sharma, 002, and psharma49@wisc.edu
+2. Dhruv Jain, 002, and djain22@wisc.edu
+3. Arkin Katarey, 001, and akatarey@wisc.edu
+4. Shrey Shah, 001, and ssha53@wisc.edu
+
+ 
+
+Which team members were on same xteam together?
+None 
+
+Other notes or comments to the grader:
+
+[place any comments or notes that will help the grader here]

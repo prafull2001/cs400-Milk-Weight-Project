@@ -4,13 +4,13 @@ import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
 import java.util.List;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.*;
