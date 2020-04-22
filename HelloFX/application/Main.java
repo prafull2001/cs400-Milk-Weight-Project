@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 import java.util.List;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
+import javafx.collections.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.*;
