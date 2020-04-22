@@ -4,6 +4,8 @@ import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.FileInputStream;
 import java.util.List;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -87,12 +89,21 @@ public class Main extends Application {
         rightCol.getChildren().addAll(rightRow1, rightRow2);
         rightCol.setStyle("-fx-padding: 10;"+"-fx-border-width: 5;");
         
-        
+        //create graph standin
+        ImageView imageView = new ImageView(new Image(new FileInputStream("graph.png")));
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(800);
+        VBox graphImg = new VBox(imageView);
+        graphImg.setAlignment(Pos.BASELINE_CENTER);
+
+
+        root.setBottom(graphImg);
         root.setTop(progLabel);
         root.setAlignment(progLabel,Pos.CENTER);
         root.setLeft(leftCol);
         root.setCenter(midCol);
-        root.setRight(rightCol);     
+        root.setRight(rightCol); 
+
         
         
         Scene scene = new Scene (root, WINDOW_WIDTH, WINDOW_HEIGHT);
