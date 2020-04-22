@@ -25,7 +25,7 @@ public class Main extends Application {
     // NOTE: this.getParameters().getRaw() will get these also
     private List<String> args;
 
-    private static final int WINDOW_WIDTH = 900;
+    private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
     private static final String APP_TITLE = "MILK WEIGHT PROGRAM";
 
