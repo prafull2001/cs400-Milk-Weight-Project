@@ -6,11 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.List;
 import javafx.application.Application;
-import javafx.collections.*;
+import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.*;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.*;
@@ -24,7 +24,7 @@ public class Main extends Application {
     // NOTE: this.getParameters().getRaw() will get these also
     private List<String> args;
 
-    private static final int WINDOW_WIDTH = 800;
+    private static final int WINDOW_WIDTH = 900;
     private static final int WINDOW_HEIGHT = 600;
     private static final String APP_TITLE = "MILK WEIGHT PROGRAM";
 
@@ -44,10 +44,11 @@ public class Main extends Application {
         leftRow1.getChildren().addAll(queryLabel, query_type);
         HBox leftRow2 = new HBox();
         Label inputLabel = new Label("INPUT DATA: ");
-        TextField data = new TextField("input data here..."); 
+        TextField queryDataFarmID = new TextField("Farm ID"); 
+        TextField queryDataTime = new TextField("Time Range"); 
         inputLabel.setStyle("-fx-padding: 4;");
-        data.setStyle("-fx-padding: 4;");
-        leftRow2.getChildren().addAll(inputLabel, data);
+        queryDataFarmID.setStyle("-fx-padding: 4;");
+        leftRow2.getChildren().addAll(inputLabel, queryDataFarmID, queryDataTime);
         leftCol.getChildren().addAll(leftRow1, leftRow2);
         leftCol.setStyle("-fx-padding: 10;"+"-fx-border-width: 5;");
         
@@ -57,13 +58,13 @@ public class Main extends Application {
         VBox midRightCol = new VBox();
         RadioButton rb1 = new RadioButton("ADD DATA");
         RadioButton rb2 = new RadioButton("REMOVE DATA");
-        Label addRem = new Label("ADD OR REMOVE");
-        addRem.setFont(new Font("Arial", 16));
+        midLeftCol.setAlignment(Pos.BASELINE_RIGHT);
+        midRightCol.setAlignment(Pos.BASELINE_RIGHT);
         midLeftCol.getChildren().add(rb1);
         midRightCol.getChildren().add(rb2);
         midLeftCol.setStyle("-fx-padding: 4;");
         midRightCol.setStyle("-fx-padding: 4;");
-        midCol.getChildren().addAll(addRem, midLeftCol, midRightCol);
+        midCol.getChildren().addAll(midLeftCol, midRightCol);
         midCol.setAlignment(Pos.TOP_CENTER);
         midCol.setStyle("-fx-padding: 10;"+"-fx-border-width: 5;");
         
@@ -80,7 +81,9 @@ public class Main extends Application {
         HBox rightRow2 = new HBox();
         dataTypeLabel.setStyle("-fx-padding: 4;");
         inputLabel.setStyle("-fx-padding: 4;");
-        rightRow2.getChildren().addAll(dataTypeLabel, data);
+        TextField addData = new TextField("input data here..."); 
+        addData.setStyle("-fx-padding: 4;");
+        rightRow2.getChildren().addAll(dataTypeLabel, addData);
         rightCol.getChildren().addAll(rightRow1, rightRow2);
         rightCol.setStyle("-fx-padding: 10;"+"-fx-border-width: 5;");
         
