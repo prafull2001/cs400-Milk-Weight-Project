@@ -1,2 +1,2 @@
 # cs400-Milk-Weight-Project
-Repository for ATeam 108's Final Project
+Final project for CS400, Spring 2020, at UW-Madison with A-team 108
