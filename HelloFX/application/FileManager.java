@@ -1,11 +1,13 @@
 package application;
-  import java.io.File;
-  import java.io.FileReader;
-  import java.io.FileWriter;
-  import java.io.IOException;
-  import java.nio.file.Files;
-  import java.nio.file.Paths;
-  import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
   public class FileManager {
     String inputFile;
@@ -65,20 +67,37 @@ package application;
 
     }
 
-    public boolean writeFile() {
-      try {
-        FileWriter writer = new FileWriter("newReport.csv");
-        writer.append("date");
-        writer.append(",");
-        writer.append("farm_id");
-        writer.append(",");
-        writer.append("weight");
-        writer.append("\n");
-
-      } catch (IOException e) {
-        e.printStackTrace();
+    public boolean writeFile(File f, String newLine) {
+      if(checkExisting(f, newLine)) {
+        return false;
+      } else {
+        try { 
+          String filePath = f.getPath();
+          BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));   
+          writer.write(newLine);
+          writer.close();
+          return true;
+        } catch(Exception e) {
+          e.printStackTrace();
+        }
+        
       }
       return false;
+      
+    }
+    
+    public boolean checkExisting(File f, String newLine) {
+      String filePath = f.getPath();
+      Scanner scanner = new Scanner(filePath);
+
+      while (scanner.hasNextLine()) {
+          String line = scanner.nextLine();
+          if(line.equals(newLine)) { 
+              return true;
+          }
+      }
+      return false;
+      
     }
 
     public String getFileContents() {
@@ -92,10 +111,12 @@ package application;
     }
     
     public static void main(String[] args) {
-      File f = new File("/Users/dhruvjain/Downloads/csv/large/2019-8.csv");
+      File f = new File("/Users/prafullsharma/Desktop/csv/small/2019-1.csv");
       FileManager fm = new FileManager(f);
+      fm.writeFile(f, "testing");
       String s = fm.getFileContents();
       System.out.println(s);
+      
     }
 
   }
