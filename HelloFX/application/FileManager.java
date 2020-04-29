@@ -90,6 +90,13 @@ package application;
       }
       return text;
     }
+    
+    public static void main(String[] args) {
+      File f = new File("/Users/dhruvjain/Downloads/csv/large/2019-8.csv");
+      FileManager fm = new FileManager(f);
+      String s = fm.getFileContents();
+      System.out.println(s);
+    }
 
   }
 
