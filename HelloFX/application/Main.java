@@ -20,6 +20,33 @@ import javafx.stage.Stage;
 import javafx.event.EventHandler;
 
 
+/*
+ * TO DO:
+ * 
+ * complete DataManager class, connect to CheeseFactory and FileManager classes. To handle inputs from GUI must use event handlers on
+ * "SUBMIT" buttons that you will add, as such:
+ * 
+ *
+ btn.setOnAction(new EventHandler<ActionEvent>() {
+ 
+    @Override
+    public void handle(ActionEvent e) {
+        actiontarget.setFill(Color.FIREBRICK);
+        actiontarget.setText("Sign in button pressed");
+    }
+});
+ *
+ *this link goes into more detail
+ *https://docs.oracle.com/javafx/2/get_started/form.htm
+ */
+
+
+
+
+
+
+
+
 public class Main extends Application {
   // store any command-line arguments that were entered.
   // NOTE: this.getParameters().getRaw() will get these also
