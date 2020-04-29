@@ -112,7 +112,7 @@ public class FileManager {
   }
 
   public static void main(String[] args) {
-    File f = new File("/Users/prafullsharma/Desktop/csv/small/2019-1.csv");
+    File f = new File("/Users/dhruvjain/Downloads/csv/small/2019-8.csv");
     FileManager fm = new FileManager(f);
     fm.writeFile(f, "testing");
     String s = fm.getFileContents();
