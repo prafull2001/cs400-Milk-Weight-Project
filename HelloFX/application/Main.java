@@ -1,11 +1,21 @@
 package application;
 
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
+import javafx.collections.*;
 import javafx.collections.FXCollections;
-import javafx.stage.Stage;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -14,32 +24,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.scene.control.*;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import java.io.FileInputStream;
-import java.util.List;
-import javafx.application.Application;
-import javafx.collections.*;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
-import javafx.scene.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.event.EventHandler;
 
 public class Main extends Application {
   // store any command-line arguments that were entered.
