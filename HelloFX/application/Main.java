@@ -97,23 +97,28 @@ public class Main extends Application {
 	            			other.equals("Date Range (2020-4-3,2020-12-10)"))) {
 	            		String queryString = query_type.getValue().toString();
 	            		if (queryString.equals("Month")) {
-//		            		String thisText = queryDataFarmID.getText();
-//	            			min.setText(df.getMonthlyMinForFarm(other, thisText));
-//	            			avg.setText(df.getMonthlyAvgForFarm(other, thisText));
-//	            			max.setText(df.getMonthlyMaxForFarm(other, thisText));
-	            			System.out.println("min");
-	            			System.out.println("avg");
-	            			System.out.println("max");
-	            			//DO OTHERS
+		            		String thisText = queryDataFarmID.getText();
+	            			min.setText(df.getMonthlyMinForFarm(other, thisText));
+	            			avg.setText(df.getMonthlyAvgForFarm(other, thisText));
+	            			max.setText(df.getMonthlyMaxForFarm(other, thisText));
+	            			farmShare.setText(String.format("%.2f", (
+        					Double.parseDouble(
+        							df.getMonthlyAvgForFarm(thisText, other))
+        					/ Double.parseDouble(
+        							df.getMonthlyAverage())))
+        					.toString() + "% of total");
+//	            			System.out.println("min");
+//	            			System.out.println("avg");
+//	            			System.out.println("max");
 	            		} else {
-//	            			String[] dateRanges = other.split(",");
-//	            			min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-//	            			avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-//	            			max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
-	            			System.out.println("min");
-	            			System.out.println("avg");
-	            			System.out.println("max");
-	            			//DO OTHERS
+	            			String[] dateRanges = other.split(",");
+	            			min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
+	            			avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
+	            			max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+	            			farmShare.setText("");
+//	            			System.out.println("min");
+//	            			System.out.println("avg");
+//	            			System.out.println("max");
 	            		}
 	            	}
             	} else {
@@ -130,23 +135,28 @@ public class Main extends Application {
 	            	if (!(other.equals("Farm ID (Farm 32)"))) {
 	            		String queryString = query_type.getValue().toString();
 	            		if (queryString.equals("Month")) {
-//		            		String thisText = queryDataTime.getText();
-//	            			min.setText(df.getMonthlyMinForFarm(thisText, other));
-//	            			avg.setText(df.getMonthlyAvgForFarm(thisText, other));
-//	            			max.setText(df.getMonthlyMaxForFarm(thisText, other));
-	            			System.out.println("min");
-	            			System.out.println("avg");
-	            			System.out.println("max");
-	            			//DO OTHERS
+		            		String thisText = queryDataTime.getText();
+	            			min.setText(df.getMonthlyMinForFarm(thisText, other));
+	            			avg.setText(df.getMonthlyAvgForFarm(thisText, other));
+	            			max.setText(df.getMonthlyMaxForFarm(thisText, other));
+	            			farmShare.setText(String.format("%.2f", (
+	            					Double.parseDouble(
+	            							df.getMonthlyAvgForFarm(thisText, other))
+	            					/ Double.parseDouble(
+	            							df.getMonthlyAverage())))
+	            					.toString() + "% of total");
+//	            			System.out.println("min");
+//	            			System.out.println("avg");
+//	            			System.out.println("max");
 	            		} else {
-//	            			String[] dateRanges = other.split(",");
-//	            			min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-//	            			avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-//	            			max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
-	            			System.out.println("min");
-	            			System.out.println("avg");
-	            			System.out.println("max");
-	            			//DO OTHERS
+	            			String[] dateRanges = other.split(",");
+	            			min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
+	            			avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
+	            			max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+	            			farmShare.setText("");
+//	            			System.out.println("min");
+//	            			System.out.println("avg");
+//	            			System.out.println("max");
 	            		}
 	            	}
             	} else {
@@ -198,8 +208,8 @@ public class Main extends Application {
             	if (data_type.getValue().toString().equals("File")) {
             		if (rb1.isSelected()) {
             			try {
-	            			//df = new DataManager(addData.getText());
-	            			System.out.println("MADE DATA MANAGER");
+	            			df = new DataManager(addData.getText());
+	            			addData.setText("New file loaded!");
 	            			fileLoaded = true;
             			} catch (Exception e) {
             				addData.setText("File not found");
@@ -212,15 +222,15 @@ public class Main extends Application {
             		if (addDataSplit.length == 3) {
                 		if (rb1.isSelected()) {
                 			try {
-	                			//df.insertData(addDataSplit);
-	                			System.out.println("ADD DATA");
+	                			df.insertData(addDataSplit);
+//	                			System.out.println("ADD DATA");
                 			} catch (Exception e) {
                 				addData.setText("Incorrect format");
                 			}
                 		} else {
                 			try {
-                    			//df.removeData(addDataSplit);
-                    			System.out.println("REMOVE DATA");
+                    			df.removeData(addDataSplit);
+//                    			System.out.println("REMOVE DATA");
                 			} catch (Exception e) {
                 				addData.setText("Incorrect format");
                 			}
@@ -267,6 +277,7 @@ public class Main extends Application {
     primaryStage.setScene(scene);
     primaryStage.show();
   }
+
   /**
    * @param args
    */
