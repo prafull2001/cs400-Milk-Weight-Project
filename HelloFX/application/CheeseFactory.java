@@ -170,8 +170,7 @@ public class CheeseFactory {
    * @return - the monthly average for the specified farm as a string 
    */
   public String getMonthlyAverageForFarm(String month, String farm) {
-    String farmID = farm.split(",")[1];
-    return Double.toString(milkDataFromFarms.get(farmID).getMonthAverage(Integer.parseInt(month)));
+    return Double.toString(milkDataFromFarms.get(farm).getMonthAverage(Integer.parseInt(month)));
   }
   
   /*
@@ -181,8 +180,7 @@ public class CheeseFactory {
    * @return - the monthly average for the specified farm as a string 
    */
   public String getMonthlyMinForFarm(String month, String farm) {
-    String farmID = farm.split(",")[1];
-    return Integer.toString(milkDataFromFarms.get(farmID).getMin(Integer.parseInt(month)));
+    return Integer.toString(milkDataFromFarms.get(farm).getMin(Integer.parseInt(month)));
   }
   
   /*
@@ -192,8 +190,7 @@ public class CheeseFactory {
    * @return - the monthly average for the specified farm as a string 
    */
   public String getMonthlyMaxForFarm(String month, String farm) {
-    String farmID = farm.split(",")[1];
-    return Integer.toString(milkDataFromFarms.get(farmID).getMax(Integer.parseInt(month)));
+    return Integer.toString(milkDataFromFarms.get(farm).getMax(Integer.parseInt(month)));
   }
   
   
