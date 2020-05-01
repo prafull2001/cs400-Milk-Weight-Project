@@ -9,16 +9,30 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-
+/**
+ * Manages file reading and writing data
+ * 
+ * 
+ *
+ */
 public class FileManager {
   String inputFile;
   String outputFile;
-
+  /**
+   * Constructor that takes a file as input and gets the path
+   * 
+   * @param file
+   */
   public FileManager(File file) {
     inputFile = file.getPath();
 
   }
-
+  /**
+   * This method reads in a csv file and prints it, throwing errors if the file contents do not
+   * correspond to the correct format
+   * 
+   * @return true when the method runs as intended, false otherwise
+   */
   public boolean readFile() {
     BufferedReader br = null;
     try {
@@ -59,7 +73,7 @@ public class FileManager {
       System.out.println(e3);
     } finally {
       try {
-        br.close();
+        br.close(); // Closes the BufferedReader object
       } catch (Exception e4) {
         e4.printStackTrace();
       }
@@ -67,7 +81,13 @@ public class FileManager {
     return false;
 
   }
-
+  /**
+   * Writes a new line in a file
+   * 
+   * @param f       file to be written over
+   * @param newLine the new line to be written into the file
+   * @return true if method runs as intended, throws an error and returns false otherwise
+   */
   public boolean writeFile(File f, String newLine) {
     if (checkExisting(f, newLine)) {
       return false;
@@ -86,7 +106,13 @@ public class FileManager {
     return false;
 
   }
-
+  /**
+   * This method checks whether a String of data exists
+   * 
+   * @param f       file to be checked
+   * @param newLine String to be checked against
+   * @return true whether string already exists in file, false otherwise
+   */
   public boolean checkExisting(File f, String newLine) {
     String filePath = f.getPath();
     Scanner scanner = new Scanner(filePath);
@@ -104,13 +130,19 @@ public class FileManager {
   public String getFileContents() {
     String text = "";
     try {
-      text = new String(Files.readAllBytes(Paths.get(inputFile)));
+      text = new String(Files.readAllBytes(Paths.get(inputFile)));// This line puts all the content
+                                                                  // of the file in a String
     } catch (IOException e) {
       e.printStackTrace();
     }
     return text;
   }
 
+  /**
+   * Main method for testing THIS MAY NEED TO BE DELETED
+   * 
+   * @param args
+   */
   public static void main(String[] args) {
     File f = new File("/Users/dhruvjain/Downloads/csv/small/2019-8.csv");
     FileManager fm = new FileManager(f);
@@ -121,4 +153,5 @@ public class FileManager {
   }
 
 }
+
 
