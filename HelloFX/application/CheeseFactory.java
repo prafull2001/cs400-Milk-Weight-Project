@@ -83,8 +83,8 @@ public class CheeseFactory {
   
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    Collection<Farm> setf = milkDataFromFarms.values();
-    for(Farm f: setf) {
+    Collection<Farm> colF = milkDataFromFarms.values();
+    for(Farm f: colF) {
       sb.append("----------"+f.getID()+"----------\n");
       sb.append(f.toString());
     }
@@ -100,38 +100,100 @@ public class CheeseFactory {
     cf.insertSingleData("2019-1-1,Farm 4,6760");
     cf.insertSingleData("2019-1-1,Farm 5,6760");
     cf.insertSingleData("2019-1-1,Farm 6,6760");
+    cf.insertSingleData("2019-1-1,Farm 6,63460");
+    System.out.println(cf);
     cf.removeSingleData("2019-1-1,Farm 6,6760");
     System.out.println(cf);
   }
   
-  public String getMonthlyAverage(String month) {    
+  public String getMonthlyAverage(String month) {
+    Collection<Farm> colF = milkDataFromFarms.values();
+    int m = Integer.parseInt(month);
+    double total=0; int count=0;
+    for(Farm f: colF) {
+      total+=f.getMonthAverage(Integer.parseInt(month));
+      count+=1;
+    }
+    return Double.toString(Math.round(total/count));
   }
   
   public String getMonthlyMin(String month) {
+    Collection<Farm> colF = milkDataFromFarms.values();
+    int m = Integer.parseInt(month);
+    int min=Integer.MAX_VALUE;
+    for(Farm f: colF) {
+      int cur = f.getMin(Integer.parseInt(month));
+      if(cur<min) {
+        min = cur;
+      }
+    }
+    return Integer.toString(min);
   }
-
+  
   public String getMonthlyMax(String month) {
+    Collection<Farm> colF = milkDataFromFarms.values();
+    int m = Integer.parseInt(month);
+    int max=0;
+    for(Farm f: colF) {
+      int cur = f.getMax(m);
+      if(cur>max) {
+        max = cur;
+      }
+    }
+    return Integer.toString(max);
   }
   
   public String getMonthlyAverageForFarm(String month, String farm) {
+    String farmID = farm.split(",")[1];
+    return Double.toString(milkDataFromFarms.get(farmID).getMonthAverage(Integer.parseInt(month)));
   }
   
   public String getMonthlyMinForFarm(String month, String farm) {
+    String farmID = farm.split(",")[1];
+    return Integer.toString(milkDataFromFarms.get(farmID).getMin(Integer.parseInt(month)));
   }
   
   public String getMonthlyMaxForFarm(String month, String farm) {
+    String farmID = farm.split(",")[1];
+    return Integer.toString(milkDataFromFarms.get(farmID).getMax(Integer.parseInt(month)));
   }
   
   public String getDataSortedByField() {
+    return "";
   }
   
   public String getAverageInDateRange(String start, String end) {
+    Collection<Farm> colF = milkDataFromFarms.values();
+    double total=0; int count=0;
+    for(Farm f: colF) {
+      total += f.getAverageInRange(start, end);
+      count+=1;
+    }
+    return Double.toString(Math.round(total/count));
   }
   
   public String getMinInDateRange(String start, String end) {
+    Collection<Farm> colF = milkDataFromFarms.values();
+    int min=Integer.MAX_VALUE;
+    for(Farm f: colF) {
+      int cur = f.getMinInRange(start, end);
+      if(cur<min) {
+        min = cur;
+      }
+    }
+    return Integer.toString(min);
   }
   
   public String getMaxInDateRange(String start, String end) {
+    Collection<Farm> colF = milkDataFromFarms.values();
+    int max=0;
+    for(Farm f: colF) {
+      int cur = f.getMinInRange(start, end);
+      if(cur>max) {
+        max = cur;
+      }
+    }
+    return Integer.toString(max);
   }
   
 }
