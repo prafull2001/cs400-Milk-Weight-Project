@@ -44,32 +44,42 @@ public class DataManager {
   }
   
   public String getMonthlyAverage() {
+    return cf.getMonthlyAverage();
   }
   
   public String getMonthlyMin() {
+    return cf.getMonthlyAverage();
   }
 
   public String getMonthlyMax() {
+    return cf.getMonthlyAverage();
   }
   
   public String getMonthlyAverageForFarm() {
+    return cf.getMonthlyAverage();
   }
   
   public String getMonthlyMinForFarm() {
+    return cf.getMonthlyAverage();
   }
   
   public String getMonthlyMaxForFarm() {
+    return cf.getMonthlyAverage();
   }
   
   public String getDataSortedByField() {
+    return cf.getMonthlyAverage();
   }
   
   public String getAverageInDateRange() {
+    return cf.getMonthlyAverage();
   }
   
   public String getMinInDateRange() {
+    return cf.getMonthlyAverage();
   }
   
   public String getMaxInDateRange() {
+    return cf.getMonthlyAverage();
   }
 }
