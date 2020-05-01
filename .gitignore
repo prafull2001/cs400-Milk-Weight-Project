@@ -25,3 +25,4 @@ hs_err_pid*
 #other (given by Professor Debra Deppeler)
 *.project
 *.settings
+/.metadata/
