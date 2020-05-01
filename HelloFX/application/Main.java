@@ -132,9 +132,18 @@ public class Main extends Application {
               String queryString = query_type.getValue().toString();
               if (queryString.equals("Month")) {
                 String thisText = queryDataTime.getText();
-                min.setText(df.getMonthlyMinForFarm(thisText, other));
-                avg.setText(df.getMonthlyAverageForFarm(thisText, other));
-                max.setText(df.getMonthlyMaxForFarm(thisText, other));
+                try {
+                  min.setText("minimum: "+df.getMonthlyMinForFarm(thisText, other));
+                  avg.setText("average: "+df.getMonthlyAverageForFarm(thisText, other));
+                  max.setText("maximum: "+df.getMonthlyMaxForFarm(thisText, other));
+                }
+                catch(IllegalArgumentException e ) {
+                  min.setText("");
+                  avg.setText("");
+                  max.setText("");
+                  queryDataTime.setText("Please enter valid input.");
+                  farmShare.setText("");
+                }
                 farmShare.setText(String
                     .format("%.2f",
                         (Double.parseDouble(df.getMonthlyAverageForFarm(thisText, other))
@@ -145,9 +154,9 @@ public class Main extends Application {
                 // System.out.println("max");
               } else {
                 String[] dateRanges = other.split(",");
-                min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-                avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-                max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+                min.setText("minimum: "+df.getMinInDateRange(dateRanges[0], dateRanges[1]));
+                avg.setText("average: "+df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
+                max.setText("maximum: "+df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
                 farmShare.setText("");
                 // System.out.println("min");
                 // System.out.println("avg");
@@ -207,7 +216,6 @@ public class Main extends Application {
                 addData.setText("New file loaded!");
                 fileLoaded = true;
               } catch (Exception e) {
-                e.printStackTrace();
                 addData.setText("File not found");
               }
             } else {
