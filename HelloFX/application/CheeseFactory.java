@@ -1,5 +1,6 @@
 package application;
 
+import java.util.Collection;
 import java.util.Hashtable;
 
 /**
@@ -55,13 +56,14 @@ public class CheeseFactory {
    */
   public boolean insertSingleData(String data) {
     String[] datas = data.split(",");
-    int index = datas[1].hashCode();
-    String data = datas[0]+" "+datas[2];
-    if(milkDataFromFarms.get(index)==null) {
-      milkDataFromFarms.put(datas[1], new Farm(data));
+    data = datas[0]+" "+datas[2];
+    if(milkDataFromFarms.get(datas[1])==null) {
+      Farm f = new Farm(datas[1]);
+      f.insertMilkForDate(data);
+      milkDataFromFarms.put(datas[1], f);
       return true;
     } else {
-      return milkDataFromFarms.get(index).insertMilkForDate(data);
+      return milkDataFromFarms.get(datas[1]).insertMilkForDate(data);
     }
   }
   
@@ -71,13 +73,35 @@ public class CheeseFactory {
    */
   public String removeSingleData(String data) {
     String[] datas = data.split(",");
-    int index = datas[1].hashCode();
     data = datas[0]+" "+datas[2];
-    if(milkDataFromFarms.get(index)==null) {
+    if(milkDataFromFarms.get(datas[1])==null) {
       return null;
     } else {
-      return milkDataFromFarms.get(index).removeMilkForDate(data);
+      return milkDataFromFarms.get(datas[1]).removeMilkForDate(data);
     }
+  }
+  
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    Collection<Farm> setf = milkDataFromFarms.values();
+    for(Farm f: setf) {
+      sb.append("----------"+f.getID()+"----------\n");
+      sb.append(f.toString());
+    }
+    return sb.toString();
+  }
+  
+  public static void main(String[] args) {
+    CheeseFactory cf = new CheeseFactory();
+    cf.insertSingleData("2019-1-1,Farm 0,6760");
+    cf.insertSingleData("2019-1-1,Farm 1,6760");
+    cf.insertSingleData("2019-1-1,Farm 2,6760");
+    cf.insertSingleData("2019-1-1,Farm 3,6760");
+    cf.insertSingleData("2019-1-1,Farm 4,6760");
+    cf.insertSingleData("2019-1-1,Farm 5,6760");
+    cf.insertSingleData("2019-1-1,Farm 6,6760");
+    cf.removeSingleData("2019-1-1,Farm 6,6760");
+    System.out.println(cf);
   }
   
   public String getMonthlyAverage(String month) {    
@@ -109,6 +133,5 @@ public class CheeseFactory {
   
   public String getMaxInDateRange(String start, String end) {
   }
-      
   
 }
