@@ -46,6 +46,15 @@ public class DataManager {
     }
   }
   
+  public void insertData(String[] data) {
+    try {
+      Integer.parseInt(data[3]);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("invalid input");
+    }
+    cf.insertData(sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
+  }
+  
   public String getMonthlyAverage(String month) {
     return cf.getMonthlyAverage(sanitizeMonthInput(month));
   }
