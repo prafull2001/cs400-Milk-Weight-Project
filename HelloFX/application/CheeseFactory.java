@@ -17,7 +17,7 @@ public class CheeseFactory {
   }
   
   /**
-   * @param data - multiple lines of data to insert
+   * @param data - multiple lines of data to insert all in one String
    * @return - true if all datas were successfully added
    */
   public boolean insertData(String data) {
@@ -33,6 +33,10 @@ public class CheeseFactory {
     return ret;
   }
   
+  /**
+   * @param data - multiple lines of data to insert in one array, broken up by line
+   * @return - true if all datas were successfully added
+   */
   public boolean insertData(String[] datas) {
     boolean ret = true;
     for(String s: datas) {
@@ -52,7 +56,7 @@ public class CheeseFactory {
   public boolean insertSingleData(String data) {
     String[] datas = data.split(",");
     int index = datas[1].hashCode();
-    data = datas[0]+" "+datas[2];
+    String data = datas[0]+" "+datas[2];
     if(milkDataFromFarms.get(index)==null) {
       milkDataFromFarms.put(datas[1], new Farm(data));
       return true;
@@ -75,4 +79,37 @@ public class CheeseFactory {
       return milkDataFromFarms.get(index).removeMilkForDate(data);
     }
   }
+  
+  public String getMonthlyAverage() {
+    
+  }
+  
+  public String getMonthlyMin() {
+  }
+
+  public String getMonthlyMax() {
+  }
+  
+  public String getMonthlyAverageForFarm(String farm) {
+  }
+  
+  public String getMonthlyMinForFarm() {
+  }
+  
+  public String getMonthlyMaxForFarm() {
+  }
+  
+  public String getDataSortedByField() {
+  }
+  
+  public String getAverageInDateRange() {
+  }
+  
+  public String getMinInDateRange() {
+  }
+  
+  public String getMaxInDateRange() {
+  }
+      
+  
 }
