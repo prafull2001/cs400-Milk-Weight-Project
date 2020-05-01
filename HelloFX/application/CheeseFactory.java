@@ -3,11 +3,12 @@ package application;
 import java.util.Collection;
 import java.util.Hashtable;
 
-/**
+/*
  * 
- * @author Dhruv Jain
+ * @author Dhruv Jain, Shrey Shah, Prafull Sharma, Arkin Katery
  * 
- * This class 
+ * This class instantiates a "Cheese" Factory object. Tracks farms associated to it in a hashtable. Inserts and removes 
+ * various data to files in various forms  
  *
  */
 public class CheeseFactory {
@@ -18,10 +19,11 @@ public class CheeseFactory {
   }
   
   public int getNumFarms() {
-    milkDataFromFarms.size()
+    return milkDataFromFarms.size();
   }
   
   /**
+   * Method inserts multiple lines of data to file in a single string format
    * @param data - multiple lines of data to insert all in one String
    * @return - true if all datas were successfully added
    */
@@ -39,9 +41,11 @@ public class CheeseFactory {
   }
   
   /**
+   * Method inserts multiple lines of data in a string array format
    * @param data - multiple lines of data to insert in one array, broken up by line
    * @return - true if all datas were successfully added
    */
+
   public boolean insertData(String[] datas) {
     boolean ret = true;
     for(String s: datas) {
@@ -55,6 +59,7 @@ public class CheeseFactory {
   }
   
   /**
+   * Method inserts single pieces of data to the hashtable
    * @param data - Single data to add to hash table
    * @return - true if data was inserted successfully
    */
@@ -72,6 +77,7 @@ public class CheeseFactory {
   }
   
   /**
+   * Mehtod removes single pieces of data from the hashtable
    * @param data - data to remove
    * @return - a copy of the data just removed
    */
@@ -85,6 +91,11 @@ public class CheeseFactory {
     }
   }
   
+  /*
+   * Method overrides the toString method for the Cheesfactory class and returns elements as strings
+   *  
+   * @return - farm IDs stored in hashtable
+   */
   public String toString() {
     StringBuilder sb = new StringBuilder();
     Collection<Farm> colF = milkDataFromFarms.values();
@@ -95,21 +106,13 @@ public class CheeseFactory {
     return sb.toString();
   }
   
-  public static void main(String[] args) {
-    CheeseFactory cf = new CheeseFactory();
-    cf.insertSingleData("2019-1-1,Farm 0,6760");
-    cf.insertSingleData("2019-1-1,Farm 1,6760");
-    cf.insertSingleData("2019-1-1,Farm 2,6760");
-    cf.insertSingleData("2019-1-1,Farm 3,6760");
-    cf.insertSingleData("2019-1-1,Farm 4,6760");
-    cf.insertSingleData("2019-1-1,Farm 5,6760");
-    cf.insertSingleData("2019-1-1,Farm 6,6760");
-    cf.insertSingleData("2019-1-1,Farm 6,63460");
-    System.out.println(cf);
-    cf.removeSingleData("2019-1-1,Farm 6,6760");
-    System.out.println(cf);
-  }
-  
+  /*
+   * Method calculates and returns the monthly average of farms 
+   * 
+   * @param month - month to calculate the average of
+   * @return - the monthly average in the for of a string
+   */
+
   public String getMonthlyAverage(String month) {
     Collection<Farm> colF = milkDataFromFarms.values();
     int m = Integer.parseInt(month);
@@ -121,6 +124,13 @@ public class CheeseFactory {
     return Double.toString(Math.round(total/count));
   }
   
+  /*
+   * Method returns the month with the smallest yield as a string
+   * 
+   * @param month - month to find the smallest yield of 
+   * @return - the name of the month in the form of a String 
+   */
+
   public String getMonthlyMin(String month) {
     Collection<Farm> colF = milkDataFromFarms.values();
     int m = Integer.parseInt(month);
@@ -134,6 +144,12 @@ public class CheeseFactory {
     return Integer.toString(min);
   }
   
+  /*
+   * Method returns the month with the largest yield as a string
+   * 
+   * @param month - month to find the largest yield of 
+   * @return - the name of the month in the form of a String 
+   */
   public String getMonthlyMax(String month) {
     Collection<Farm> colF = milkDataFromFarms.values();
     int m = Integer.parseInt(month);
@@ -147,25 +163,46 @@ public class CheeseFactory {
     return Integer.toString(max);
   }
   
+  /*
+   * method returns the monthly average for a farm
+   * 
+   * @param month, farm - the month as well as the farm ID to calculate the average of 
+   * @return - the monthly average for the specified farm as a string 
+   */
   public String getMonthlyAverageForFarm(String month, String farm) {
     String farmID = farm.split(",")[1];
     return Double.toString(milkDataFromFarms.get(farmID).getMonthAverage(Integer.parseInt(month)));
   }
   
+  /*
+   * method returns the monthly minimum for a farm
+   * 
+   * @param month, farm - the month as well as the farm ID to calculate the minimum of 
+   * @return - the monthly average for the specified farm as a string 
+   */
   public String getMonthlyMinForFarm(String month, String farm) {
     String farmID = farm.split(",")[1];
     return Integer.toString(milkDataFromFarms.get(farmID).getMin(Integer.parseInt(month)));
   }
   
+  /*
+   * method returns the monthly maximum for a farm
+   * 
+   * @param month, farm - the month as well as the farm ID to calculate the maximum of 
+   * @return - the monthly average for the specified farm as a string 
+   */
   public String getMonthlyMaxForFarm(String month, String farm) {
     String farmID = farm.split(",")[1];
     return Integer.toString(milkDataFromFarms.get(farmID).getMax(Integer.parseInt(month)));
   }
   
-  public String getDataSortedByField() {
-    return "";
-  }
   
+  /*
+   * method returns the average weight yield in a specified average
+   * 
+   * @param start, end - starting and ending date to find average of
+   * @return - average as a string
+   */
   public String getAverageInDateRange(String start, String end) {
     Collection<Farm> colF = milkDataFromFarms.values();
     double total=0; int count=0;
@@ -176,6 +213,12 @@ public class CheeseFactory {
     return Double.toString(Math.round(total/count));
   }
   
+  /*
+   * method returns the minimum weight yield in a specified average
+   * 
+   * @param start, end - starting and ending date to find minimum of
+   * @return - average as a string
+   */
   public String getMinInDateRange(String start, String end) {
     Collection<Farm> colF = milkDataFromFarms.values();
     int min=Integer.MAX_VALUE;
@@ -188,6 +231,12 @@ public class CheeseFactory {
     return Integer.toString(min);
   }
   
+  /*
+   * method returns the maximum weight yield in a specified average
+   * 
+   * @param start, end - starting and ending date to find maximum of
+   * @return - average as a string
+   */
   public String getMaxInDateRange(String start, String end) {
     Collection<Farm> colF = milkDataFromFarms.values();
     int max=0;
