@@ -29,6 +29,7 @@ public class DataManager {
    */
   public DataManager(String filePath) {
     inputFile = new File(filePath);
+    readData();
   }
   
   /*
