@@ -29,7 +29,7 @@ public class CheeseFactory {
   }
   
   /**
-   * @param data - Single data to add to hashtable
+   * @param data - Single data to add to hash table
    * @return - true if data was inserted successfully
    */
   public boolean insertSingleData(String data) {
@@ -45,8 +45,8 @@ public class CheeseFactory {
   }
   
   /**
-   * @param oldData - data that is currently in the hashtable
-   * @param newData - data to replace the current data in the hashtable
+   * @param oldData - data that is currently in the hash table
+   * @param newData - data to replace the current data in the hash table
    * @return - true if data was edited successfully
    */
   public boolean editSingleData(String oldData, String newData) {
