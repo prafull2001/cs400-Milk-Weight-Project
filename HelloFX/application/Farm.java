@@ -124,7 +124,7 @@ public class Farm {
    * @return - calculated average 
    */
   public double getMonthAverage(int month) {
-    ArrayList<String> arr = milkWeights.get(month);
+    ArrayList<String> arr = milkWeights.get(month-1);
     if(arr==null) {
       return 0;
     }
@@ -143,7 +143,7 @@ public class Farm {
    * @return - calculated min 
    */
   public int getMin(int month) {
-    ArrayList<String> arr = milkWeights.get(month);
+    ArrayList<String> arr = milkWeights.get(month-1);
     if(arr==null) {
       return Integer.MAX_VALUE;
     }
@@ -164,7 +164,7 @@ public class Farm {
    * @return - calculated max 
    */
   public int getMax(int month) {
-    ArrayList<String> arr = milkWeights.get(month);
+    ArrayList<String> arr = milkWeights.get(month-1);
     if(arr==null) {
       return 0;
     }
