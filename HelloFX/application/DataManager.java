@@ -20,9 +20,9 @@ public class DataManager {
     inputFile = new File(filePath);
   }
   
-  /*
-  TO DO : getDataSortedByField()
-  */
+  public int size() {
+    return cf.getNumFarms();
+  }
   
   private void readData() {
     BufferedReader br = null;
@@ -93,10 +93,6 @@ public class DataManager {
   
   public String getMonthlyMaxForFarm(String month, String farm) {
     return cf.getMonthlyMaxForFarm(sanitizeMonthInput(month), sanitizeFarmInput(farm));
-  }
-  
-  public String getDataSortedByField() {
-    return cf.getDataSortedByField();
   }
   
   public String getAverageInDateRange(String start, String end) {
