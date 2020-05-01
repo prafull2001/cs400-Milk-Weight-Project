@@ -1,5 +1,6 @@
 package application;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class DataManager {
   /*
    * constructor for DataManager class, initializes the inputFile variable 
    */
-  public DataManager(String filePath) {
+  public DataManager(String filePath) throws FileNotFoundException {
     inputFile = new File(filePath);
     readData();
   }
@@ -44,32 +45,34 @@ public class DataManager {
   /*
    * method reads the data of the inputFile 
    */
-  private void readData() {
+  private void readData() throws FileNotFoundException {
     BufferedReader br = null;
-    try {
-      br = new BufferedReader(new FileReader(inputFile));
+    //try {
+      br = new BufferedReader(new FileReader(inputFile)); 
       String[] fileLines = (String[]) br.lines().toArray();
       String[] fileData = Arrays.copyOfRange(fileLines, 1, fileLines.length);
       cf = new CheeseFactory();
       cf.insertData(fileData);
-      
-    } 
-    catch (IOException e) {
-      e.printStackTrace();
-    } 
-    catch (NumberFormatException e2) {
-      e2.printStackTrace();
-    } 
-    catch (IllegalArgumentException e3) {
-      System.out.println(e3);
-    } finally {
-      try {
-        br.close();
-      } catch (Exception e4) {
-        e4.printStackTrace();
-      }
-    }
   }
+      
+//    } 
+//    catch (IOException e) {
+//      e.printStackTrace();
+//    } 
+//    catch (NumberFormatException e2) {
+//      e2.printStackTrace();
+//    } 
+//    catch (IllegalArgumentException e3) {
+//      System.out.println(e3);
+//    } 
+//    finally {
+//      try {
+//        br.close();
+//      } catch (Exception e4) {
+//        e4.printStackTrace();
+//      }
+//    }
+//  }
   
   /*
    * method inserts data into the current file
