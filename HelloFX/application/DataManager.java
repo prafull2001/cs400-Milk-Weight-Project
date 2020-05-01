@@ -52,7 +52,16 @@ public class DataManager {
     } catch (Exception e) {
       throw new IllegalArgumentException("invalid input");
     }
-    cf.insertData(sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
+    cf.insertSingleData(sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
+  }
+  
+  public void removeData(String[] data) {
+    try {
+      Integer.parseInt(data[3]);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("invalid input");
+    }
+    cf.removeSingleData(sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
   }
   
   public String getMonthlyAverage(String month) {
