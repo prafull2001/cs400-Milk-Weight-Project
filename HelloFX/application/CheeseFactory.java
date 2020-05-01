@@ -13,7 +13,7 @@ public class CheeseFactory {
   
   /**
    * @param data - multiple lines of data to insert
-   * @return - true if all datas were sucessfully added
+   * @return - true if all datas were successfully added
    */
   public boolean insertData(String data) {
     boolean ret = true;
