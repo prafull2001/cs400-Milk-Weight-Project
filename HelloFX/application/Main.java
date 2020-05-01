@@ -102,14 +102,18 @@ public class Main extends Application {
                 // System.out.println("avg");
                 // System.out.println("max");
               } else {
-                String[] dateRanges = other.split(",");
-                min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-                avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-                max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
-                farmShare.setText("");
-                // System.out.println("min");
-                // System.out.println("avg");
-                // System.out.println("max");
+                try {
+                  String[] dateRanges = other.split(",");
+                  min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
+                  avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
+                  max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+                  farmShare.setText("");
+                  // System.out.println("min");
+                  // System.out.println("avg");
+                  // System.out.println("max");
+                } catch (Exception e) {
+                  queryDataTime.setText("Please enter valid input.");
+                }
               }
             }
           } else {
