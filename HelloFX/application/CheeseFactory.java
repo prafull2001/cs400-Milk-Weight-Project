@@ -17,6 +17,10 @@ public class CheeseFactory {
     milkDataFromFarms = new Hashtable<String, Farm>();
   }
   
+  public int getNumFarms() {
+    milkDataFromFarms.size()
+  }
+  
   /**
    * @param data - multiple lines of data to insert all in one String
    * @return - true if all datas were successfully added
