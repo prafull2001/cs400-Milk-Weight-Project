@@ -80,35 +80,34 @@ public class CheeseFactory {
     }
   }
   
-  public String getMonthlyAverage() {
-    
+  public String getMonthlyAverage(String month) {    
   }
   
-  public String getMonthlyMin() {
+  public String getMonthlyMin(String month) {
   }
 
-  public String getMonthlyMax() {
+  public String getMonthlyMax(String month) {
   }
   
-  public String getMonthlyAverageForFarm(String farm) {
+  public String getMonthlyAverageForFarm(String month, String farm) {
   }
   
-  public String getMonthlyMinForFarm() {
+  public String getMonthlyMinForFarm(String month, String farm) {
   }
   
-  public String getMonthlyMaxForFarm() {
+  public String getMonthlyMaxForFarm(String month, String farm) {
   }
   
   public String getDataSortedByField() {
   }
   
-  public String getAverageInDateRange() {
+  public String getAverageInDateRange(String start, String end) {
   }
   
-  public String getMinInDateRange() {
+  public String getMinInDateRange(String start, String end) {
   }
   
-  public String getMaxInDateRange() {
+  public String getMaxInDateRange(String start, String end) {
   }
       
   
