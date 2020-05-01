@@ -62,8 +62,7 @@ public class DataManager {
     } 
     catch (IllegalArgumentException e3) {
       System.out.println(e3);
-    } 
-    finally {
+    } finally {
       try {
         br.close();
       } catch (Exception e4) {
