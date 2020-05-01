@@ -202,6 +202,7 @@ public class Main extends Application {
                 addData.setText("New file loaded!");
                 fileLoaded = true;
               } catch (Exception e) {
+                e.printStackTrace();
                 addData.setText("File not found");
               }
             } else {
