@@ -78,6 +78,7 @@ public class Main extends Application {
         queryDataTime.setText("Month (4)");
       if (curr.equals("Date Range"))
         queryDataTime.setText("Date Range (2020-4-3,2020-12-10)");
+      queryDataFarmID.setText("Farm ID (Farm 32)");
     });
     queryDataFarmID.setOnKeyPressed(new EventHandler<KeyEvent>() {
       public void handle(KeyEvent ke1) {
