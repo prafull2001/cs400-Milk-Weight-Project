@@ -5,18 +5,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 public class DataManager {
   
-  String inputFile;
+  File inputFile;
   String outputFile;
   CheeseFactory cf;
   
   public DataManager(String filePath) {
-    inputFile = file.getPath();
+    inputFile = new File(filePath);
   }
   
   /*
@@ -24,20 +25,25 @@ public class DataManager {
   */
   
   private void readData() {
+    BufferedReader br = null;
     try {
-      BufferedReader br = new BufferedReader(new FileReader(inputFile));
-      String[] fileLines = br.lines().toArray();
+      br = new BufferedReader(new FileReader(inputFile));
+      String[] fileLines = (String[]) br.lines().toArray();
       String[] fileData = Arrays.copyOfRange(fileLines, 1, fileLines.length);
       cf = new CheeseFactory();
       cf.insertData(fileData);
       
-    } catch (IOException e) {
+    } 
+    catch (IOException e) {
       e.printStackTrace();
-    } catch (NumberFormatException e2) {
+    } 
+    catch (NumberFormatException e2) {
       e2.printStackTrace();
-    } catch (IllegalArgumentException e3) {
+    } 
+    catch (IllegalArgumentException e3) {
       System.out.println(e3);
-    } finally {
+    } 
+    finally {
       try {
         br.close();
       } catch (Exception e4) {
@@ -58,7 +64,8 @@ public class DataManager {
   public void removeData(String[] data) {
     try {
       Integer.parseInt(data[3]);
-    } catch (Exception e) {
+    } 
+    catch (Exception e) {
       throw new IllegalArgumentException("invalid input");
     }
     cf.removeSingleData(sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
@@ -97,31 +104,34 @@ public class DataManager {
   }
   
   public String getMinInDateRange(String start, String end) {
-    return cf.getMinInDateRange(sanitizeDateInput(start), sanitizeDateInput(end);
+    return cf.getMinInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
   
   public String getMaxInDateRange(String start, String end) {
-    return cf.getMaxInDateRange(sanitizeDateInput(start), sanitizeDateInput(end);
+    return cf.getMaxInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
   
   private String sanitizeFarmInput(String farm) {
     try {
       try {
-        return ("Farm " + Integer.parseInt(farm).toString); //check if just number entered
-      } catch (NumberFormatException e) {
+        return ("Farm " + Integer.parseInt(farm)); //check if just number entered
+      } 
+      catch (NumberFormatException e) {
         String[] farmCheck = farm.toLowerCase().split(" ");
         if (farmCheck.length != 2) throw new IllegalArgumentException("invalid input");
         try {
           int ID = Integer.parseInt(farmCheck[1]);
           if (!farmCheck[0].toLowerCase().equals("farm")) throw new IllegalArgumentException("invalid input");
           return ("Farm " + ID);
-        } catch (NumberFormatException e) {
+        } 
+        catch (NumberFormatException f) {
           if (farmCheck.length != 2) throw new IllegalArgumentException("invalid input");
         }
       }
     } catch (Exception e) {
       throw new IllegalArgumentException("invalid input");
     }
+    throw new IllegalArgumentException("invalid input");
   }
   
   private String sanitizeDateInput(String date) {
@@ -130,9 +140,9 @@ public class DataManager {
       if (dateCheck.length != 3) throw new IllegalArgumentException("invalid input");
       if (Integer.parseInt(dateCheck[0]) < 0) 
         throw new IllegalArgumentException("only positive years");
-      if (Integer.parseInt(dateCheck[1]) > 12 || Integer.parseInt(farmCheck[1]) < 1)
+      if (Integer.parseInt(dateCheck[1]) > 12 || Integer.parseInt(dateCheck[1]) < 1)
         throw new IllegalArgumentException("invalid input");
-      if (Integer.parseInt(dateCheck[2]) > 31 || Integer.parseInt(farmCheck[2]) < 1)
+      if (Integer.parseInt(dateCheck[2]) > 31 || Integer.parseInt(dateCheck[2]) < 1)
         throw new IllegalArgumentException("invalid input");
       return (dateCheck[0] + "-" + dateCheck[1] + "-" + dateCheck[2]);
     } catch (Exception e) {
