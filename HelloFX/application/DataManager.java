@@ -10,20 +10,39 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
+/*
+ * 
+ * @author Dhruv Jain, Shrey Shah, Prafull Sharma, Arkin Katery
+ * 
+ * This class instantiates a DataManager class. Class generates reports that the user requests 
+ *
+ */
+
 public class DataManager {
   
   File inputFile;
   String outputFile;
   CheeseFactory cf;
   
+  /*
+   * constructor for DataManager class, initializes the inputFile variable 
+   */
   public DataManager(String filePath) {
     inputFile = new File(filePath);
   }
   
+  /*
+   * returns the number of farms in the cheesfactory
+   * 
+   * @return - size of the hashtable containing all farms in the cf 
+   */
   public int size() {
     return cf.getNumFarms();
   }
   
+  /*
+   * method reads the data of the inputFile 
+   */
   private void readData() {
     BufferedReader br = null;
     try {
@@ -52,6 +71,11 @@ public class DataManager {
     }
   }
   
+  /*
+   * method inserts data into the current file
+   * 
+   * @param - string array of data to insert into file
+   */
   public void insertData(String[] data) {
     try {
       Integer.parseInt(data[3]);
@@ -61,6 +85,11 @@ public class DataManager {
     cf.insertSingleData(sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
   }
   
+  /*
+   * method removes data from current file
+   * 
+   * @param - string array of data to remove from file
+   */
   public void removeData(String[] data) {
     try {
       Integer.parseInt(data[3]);
@@ -71,42 +100,102 @@ public class DataManager {
     cf.removeSingleData(sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
   }
   
+  /*
+   * Method returns the monthly average of a specified month
+   * 
+   * @param month - month to return the average of
+   * @return - string of the monthly average 
+   */
   public String getMonthlyAverage(String month) {
     return cf.getMonthlyAverage(sanitizeMonthInput(month));
   }
   
+  /*
+   * Method returns the monthly minimum of a specified month
+   * 
+   * @param month - month to return the minimum of
+   * @return - string of the monthly minimum of 
+   */
   public String getMonthlyMin(String month) {
     return cf.getMonthlyMin(sanitizeMonthInput(month));
   }
 
+  /*
+   * Method returns the monthly maximum of a specified month
+   * 
+   * @param month - month to return the maximum of
+   * @return - string of the monthly maximum 
+   */
   public String getMonthlyMax(String month) {
     return cf.getMonthlyMax(sanitizeMonthInput(month));
   }
   
+  /*
+   * Method returns the monthly average of a specified farm
+   * 
+   * @param month, farm - month and farm to return the average of
+   * @return - string of the monthly average for the specified farm
+   */
   public String getMonthlyAverageForFarm(String month, String farm) {
     return cf.getMonthlyAverageForFarm(sanitizeMonthInput(month), sanitizeFarmInput(farm));
   }
   
+  /*
+   * Method returns the monthly minimum of a specified farm
+   * 
+   * @param month, farm - month and farm to return the minimum of
+   * @return - string of the monthly minimum for the specified farm
+   */
   public String getMonthlyMinForFarm(String month, String farm) {
     return cf.getMonthlyMinForFarm(sanitizeMonthInput(month), sanitizeFarmInput(farm));
   }
   
+  /*
+   * Method returns the monthly maximum of a specified farm
+   * 
+   * @param month, farm - month and farm to return the maximum of
+   * @return - string of the monthly maximum for the specified farm
+   */
   public String getMonthlyMaxForFarm(String month, String farm) {
     return cf.getMonthlyMaxForFarm(sanitizeMonthInput(month), sanitizeFarmInput(farm));
   }
   
+  /*
+   * Method returns the  average of a specified date range
+   * 
+   * @param start, end - start and end date to return the average of
+   * @return - string of the average for the specified date range
+   */
   public String getAverageInDateRange(String start, String end) {
     return cf.getAverageInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
   
+  /*
+   * Method returns the  minimum of a specified date range
+   * 
+   * @param start, end - start and end date to return the minimum of
+   * @return - string of the minimum for the specified date range
+   */
   public String getMinInDateRange(String start, String end) {
     return cf.getMinInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
   
+  /*
+   * Method returns the  maximum of a specified date range
+   * 
+   * @param start, end - start and end date to return the maximum of
+   * @return - string of the maximum for the specified date range
+   */
   public String getMaxInDateRange(String start, String end) {
     return cf.getMaxInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
   
+  /*
+   * helper method, improve formatting of input
+   * 
+   * @param farm - input (farm) to "sanitize"
+   * @return - newly formatted input string
+   */
   private String sanitizeFarmInput(String farm) {
     try {
       try {
@@ -130,6 +219,12 @@ public class DataManager {
     throw new IllegalArgumentException("invalid input");
   }
   
+  /*
+   * helper method, improve formatting of input
+   * 
+   * @param farm - input (date) to "sanitize"
+   * @return - newly formatted input string
+   */
   private String sanitizeDateInput(String date) {
     try {
       String[] dateCheck = date.toLowerCase().split("-");
@@ -146,6 +241,12 @@ public class DataManager {
     }
   }
   
+  /*
+   * helper method, improve formatting of input
+   * 
+   * @param farm - input (month) to "sanitize"
+   * @return - newly formatted input string
+   */
   private String sanitizeMonthInput(String date) {
     try {
       if (Integer.parseInt(date) > 12 || Integer.parseInt(date) < 1)
