@@ -40,8 +40,9 @@ public class Main extends Application {
   private static final int WINDOW_WIDTH = 800;
   private static final int WINDOW_HEIGHT = 400;
   private static final String APP_TITLE = "MILK WEIGHT PROGRAM";
-  //private DataManager df;
+  // private DataManager df;
   boolean fileLoaded = false;
+  private DataManager df = null;
 
   @Override
   public void start(Stage primaryStage) throws Exception {
@@ -49,9 +50,9 @@ public class Main extends Application {
     Label progLabel = new Label("MILK WEIGHT PROGRAM");
     progLabel.setFont(new Font("Arial", 30));
     BorderPane root = new BorderPane();
-    
-    
-    //create info labels
+
+
+    // create info labels
     VBox bottomSection = new VBox();
     Label min = new Label("minimum: 0");
     Label avg = new Label("average: 0");
@@ -72,89 +73,86 @@ public class Main extends Application {
     TextField queryDataFarmID = new TextField("Farm ID (Farm 32)");
     TextField queryDataTime = new TextField("Month (Format: 4)");
     query_type.setOnAction((e) -> {
-    	String curr = query_type.getValue().toString();
-    	if (curr.equals("Month"))
-    		queryDataTime.setText("Month (4)");
-    	if (curr.equals("Date Range"))
-    		queryDataTime.setText("Date Range (2020-4-3,2020-12-10)");
+      String curr = query_type.getValue().toString();
+      if (curr.equals("Month"))
+        queryDataTime.setText("Month (4)");
+      if (curr.equals("Date Range"))
+        queryDataTime.setText("Date Range (2020-4-3,2020-12-10)");
     });
     queryDataFarmID.setOnKeyPressed(new EventHandler<KeyEvent>() {
-        public void handle(KeyEvent ke1) {
-            if (ke1.getCode().equals(KeyCode.ENTER)) {
-            	if (fileLoaded) {
-	            	String other = queryDataTime.getText();
-	            	if (!(other.equals("Month (Format: 4)") || 
-	            			other.equals("Month (4)") || 
-	            			other.equals("Date Range (2020-4-3,2020-12-10)"))) {
-	            		String queryString = query_type.getValue().toString();
-	            		if (queryString.equals("Month")) {
-		            		String thisText = queryDataFarmID.getText();
-	            			min.setText(df.getMonthlyMinForFarm(other, thisText));
-	            			avg.setText(df.getMonthlyAvgForFarm(other, thisText));
-	            			max.setText(df.getMonthlyMaxForFarm(other, thisText));
-	            			farmShare.setText(String.format("%.2f", (
-        					Double.parseDouble(
-        							df.getMonthlyAvgForFarm(thisText, other))
-        					/ Double.parseDouble(
-        							df.getMonthlyAverage())))
-        					.toString() + "% of total");
-//	            			System.out.println("min");
-//	            			System.out.println("avg");
-//	            			System.out.println("max");
-	            		} else {
-	            			String[] dateRanges = other.split(",");
-	            			min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-	            			avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-	            			max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
-	            			farmShare.setText("");
-//	            			System.out.println("min");
-//	            			System.out.println("avg");
-//	            			System.out.println("max");
-	            		}
-	            	}
-            	} else {
-            		queryDataFarmID.setText("Please load file first");
-            	}
+      public void handle(KeyEvent ke1) {
+        if (ke1.getCode().equals(KeyCode.ENTER)) {
+          if (fileLoaded) {
+            String other = queryDataTime.getText();
+            if (!(other.equals("Month (Format: 4)") || other.equals("Month (4)")
+                || other.equals("Date Range (2020-4-3,2020-12-10)"))) {
+              String queryString = query_type.getValue().toString();
+              if (queryString.equals("Month")) {
+                String thisText = queryDataFarmID.getText();
+                min.setText(df.getMonthlyMinForFarm(other, thisText));
+                avg.setText(df.getMonthlyAverageForFarm(other, thisText));
+                max.setText(df.getMonthlyMaxForFarm(other, thisText));
+                farmShare.setText(String
+                    .format("%.2f",
+                        (Double.parseDouble(df.getMonthlyAverageForFarm(thisText, other))
+                            / Double.parseDouble(df.getMonthlyAverage(thisText))))
+                    .toString() + "% of total");
+                // System.out.println("min");
+                // System.out.println("avg");
+                // System.out.println("max");
+              } else {
+                String[] dateRanges = other.split(",");
+                min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
+                avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
+                max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+                farmShare.setText("");
+                // System.out.println("min");
+                // System.out.println("avg");
+                // System.out.println("max");
+              }
             }
+          } else {
+            queryDataFarmID.setText("Please load file first");
+          }
         }
+      }
     });
     queryDataTime.setOnKeyPressed(new EventHandler<KeyEvent>() {
-        public void handle(KeyEvent ke2) {
-            if (ke2.getCode().equals(KeyCode.ENTER)) {
-            	if (fileLoaded) {
-	            	String other = queryDataFarmID.getText();
-	            	if (!(other.equals("Farm ID (Farm 32)"))) {
-	            		String queryString = query_type.getValue().toString();
-	            		if (queryString.equals("Month")) {
-		            		String thisText = queryDataTime.getText();
-	            			min.setText(df.getMonthlyMinForFarm(thisText, other));
-	            			avg.setText(df.getMonthlyAvgForFarm(thisText, other));
-	            			max.setText(df.getMonthlyMaxForFarm(thisText, other));
-	            			farmShare.setText(String.format("%.2f", (
-	            					Double.parseDouble(
-	            							df.getMonthlyAvgForFarm(thisText, other))
-	            					/ Double.parseDouble(
-	            							df.getMonthlyAverage())))
-	            					.toString() + "% of total");
-//	            			System.out.println("min");
-//	            			System.out.println("avg");
-//	            			System.out.println("max");
-	            		} else {
-	            			String[] dateRanges = other.split(",");
-	            			min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-	            			avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-	            			max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
-	            			farmShare.setText("");
-//	            			System.out.println("min");
-//	            			System.out.println("avg");
-//	            			System.out.println("max");
-	            		}
-	            	}
-            	} else {
-            		queryDataTime.setText("Please load file first");
-            	}
+      public void handle(KeyEvent ke2) {
+        if (ke2.getCode().equals(KeyCode.ENTER)) {
+          if (fileLoaded) {
+            String other = queryDataFarmID.getText();
+            if (!(other.equals("Farm ID (Farm 32)"))) {
+              String queryString = query_type.getValue().toString();
+              if (queryString.equals("Month")) {
+                String thisText = queryDataTime.getText();
+                min.setText(df.getMonthlyMinForFarm(thisText, other));
+                avg.setText(df.getMonthlyAverageForFarm(thisText, other));
+                max.setText(df.getMonthlyMaxForFarm(thisText, other));
+                farmShare.setText(String
+                    .format("%.2f",
+                        (Double.parseDouble(df.getMonthlyAverageForFarm(thisText, other))
+                            / Double.parseDouble(df.getMonthlyAverage(thisText))))
+                    .toString() + "% of total");
+                // System.out.println("min");
+                // System.out.println("avg");
+                // System.out.println("max");
+              } else {
+                String[] dateRanges = other.split(",");
+                min.setText(df.getMinInDateRange(dateRanges[0], dateRanges[1]));
+                avg.setText(df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
+                max.setText(df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+                farmShare.setText("");
+                // System.out.println("min");
+                // System.out.println("avg");
+                // System.out.println("max");
+              }
             }
+          } else {
+            queryDataTime.setText("Please load file first");
+          }
         }
+      }
     });
     queryDataFarmID.setStyle("-fx-padding: 4;");
     leftRow2.getChildren().addAll(queryDataFarmID, queryDataTime);
@@ -194,56 +192,56 @@ public class Main extends Application {
     HBox rightRow2 = new HBox();
     TextField addData = new TextField("File Path");
     addData.setOnKeyPressed(new EventHandler<KeyEvent>() {
-        public void handle(KeyEvent ke3) {
-            if (ke3.getCode().equals(KeyCode.ENTER)) {
-            	if (data_type.getValue().toString().equals("File")) {
-            		if (rb1.isSelected()) {
-            			try {
-	            			df = new DataManager(addData.getText());
-	            			addData.setText("New file loaded!");
-	            			fileLoaded = true;
-            			} catch (Exception e) {
-            				addData.setText("File not found");
-            			}
-            		} else {
-            			addData.setText("File cannot be removed");
-            		}
-            	} else {
-            		String[] addDataSplit = addData.getText().split(",");
-            		if (addDataSplit.length == 3) {
-                		if (rb1.isSelected()) {
-                			try {
-	                			df.insertData(addDataSplit);
-//	                			System.out.println("ADD DATA");
-                			} catch (Exception e) {
-                				addData.setText("Incorrect format");
-                			}
-                		} else {
-                			try {
-                    			df.removeData(addDataSplit);
-//                    			System.out.println("REMOVE DATA");
-                			} catch (Exception e) {
-                				addData.setText("Incorrect format");
-                			}
-                		}
-            		}
-            	}
+      public void handle(KeyEvent ke3) {
+        if (ke3.getCode().equals(KeyCode.ENTER)) {
+          if (data_type.getValue().toString().equals("File")) {
+            if (rb1.isSelected()) {
+              try {
+                df = new DataManager(addData.getText());
+                addData.setText("New file loaded!");
+                fileLoaded = true;
+              } catch (Exception e) {
+                addData.setText("File not found");
+              }
+            } else {
+              addData.setText("File cannot be removed");
             }
+          } else {
+            String[] addDataSplit = addData.getText().split(",");
+            if (addDataSplit.length == 3) {
+              if (rb1.isSelected()) {
+                try {
+                  df.insertData(addDataSplit);
+                  // System.out.println("ADD DATA");
+                } catch (Exception e) {
+                  addData.setText("Incorrect format");
+                }
+              } else {
+                try {
+                  df.removeData(addDataSplit);
+                  // System.out.println("REMOVE DATA");
+                } catch (Exception e) {
+                  addData.setText("Incorrect format");
+                }
+              }
+            }
+          }
         }
+      }
     });
     data_type.setOnAction((e) -> {
-    	String curr = data_type.getValue().toString();
-    	if (curr.equals("File")) {
-    		addData.setText("File Path");
-    	} else {
-    		addData.setText("Farm ID,Date,Pounds (Farm 32,2020-4-30,5)");
-    	}
+      String curr = data_type.getValue().toString();
+      if (curr.equals("File")) {
+        addData.setText("File Path");
+      } else {
+        addData.setText("Farm ID,Date,Pounds (Farm 32,2020-4-30,5)");
+      }
     });
     addData.setStyle("-fx-padding: 4;");
     rightRow2.getChildren().addAll(addData);
     rightCol.getChildren().addAll(rightRow1, rightRow2);
     rightCol.setStyle("-fx-padding: 10;" + "-fx-border-width: 5;");
-    
+
 
 
     // create graph stand-in
