@@ -146,6 +146,9 @@ public class Main extends Application {
                         				  / (Double.parseDouble(df.getAverageInDateRange(dateRanges[0], dateRanges[1])) * df.size()))
                         		  .toString() + "% of total units for the farm selected");
                   pre.setText("");
+                  if (farmShare.getText().equals("NaN% of total units for the farm selected")) {
+                	  farmShare.setText("0% of total units for the farm selected");
+                  }
                   //if analysis is default values, there is an invalid input
                   if (min.getText().equals("minimum 2147483647 units by all farms in this range")
                           && max.getText().equals("maximum 0 units by all farms in this range"))
@@ -217,6 +220,10 @@ public class Main extends Application {
                         		  ((df.getFarmAverageinRange(queryDataFarmID.getText(), dateRanges[0], dateRanges[1]) * 100))
                         				  / (Double.parseDouble(df.getAverageInDateRange(dateRanges[0], dateRanges[1])) * df.size()))
                         		  .toString() + "% of total units for the farm selected");
+                  pre.setText("");
+                  if (farmShare.getText().equals("NaN% of total units for the farm selected")) {
+                	  farmShare.setText("0% of total units for the farm selected");
+                  }
                   pre.setText("");
                   //if analysis is default values, there is an invalid input                  
                   if (min.getText().equals("minimum 2147483647 units by all farms in this range")
