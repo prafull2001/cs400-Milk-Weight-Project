@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
-/*
+/**
  * 
  * @author Dhruv Jain, Shrey Shah, Prafull Sharma, Arkin Katery
  * 
@@ -28,7 +28,7 @@ public class DataManager {
   CheeseFactory cf = new CheeseFactory();
 
 
-  /*
+  /**
    * returns the number of farms in the cheesfactory
    * 
    * @return - size of the hashtable containing all farms in the cf
@@ -37,8 +37,9 @@ public class DataManager {
     return cf.getNumFarms();
   }
 
-  /*
+  /**
    * method reads the data of the inputFile and inputs them into cheese factory
+   * @param filePath for csv with data to insert
    */
   public void readInsertData(String filePath) throws IOException {
 	inputFile = new File(filePath);
@@ -57,10 +58,22 @@ public class DataManager {
     catch (IOException e) {}
   }
   
+  /**
+   * get the average units a farm inputed in a given range
+   * @param id Farm ID to get units for
+   * @param start start date for date range
+   * @param end end date of date range
+   * @return average units of farm in range
+   */
   public double getFarmAverageinRange(String id, String start, String end) {
 	  return cf.get(sanitizeFarmInput(id)).getAverageInRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
   
+  /**
+   * check if csv input is valid
+   * @param input one line of csv input
+   * @return true if input is valid
+   */
   private boolean checkValidInput(String input) {
     try {
       String[] datas = input.split(",");
@@ -83,8 +96,9 @@ public class DataManager {
     }
   }
   
-  /*
-   * method reads the data of the inputFile and inputs them into cheese factory
+  /**
+   * method reads the data of the inputFile and removes them from cheese factory
+   * @param filepath of data to remove
    */
   public void readRemoveData(String filePath) throws IOException {
 	inputFile = new File(filePath);
@@ -103,7 +117,7 @@ public class DataManager {
     catch (IOException e) {}
   }
 
-  /*
+  /**
    * method inserts data into the current file
    * 
    * @param - string array of data to insert into file
@@ -118,7 +132,7 @@ public class DataManager {
         sanitizeDateInput(data[0]) + "," + sanitizeFarmInput(data[1]) + "," + data[2]);
   }
 
-  /*
+  /**
    * method removes data from current file
    * 
    * @param - string array of data to remove from file
@@ -133,7 +147,7 @@ public class DataManager {
         sanitizeDateInput(data[0]) + "," + sanitizeFarmInput(data[1]) + "," + data[2]);
   }
 
-  /*
+  /**
    * Method returns the monthly average of a specified month
    * 
    * @param month - month to return the average of
@@ -144,7 +158,7 @@ public class DataManager {
     return cf.getMonthlyAverage(sanitizeMonthInput(month));
   }
 
-  /*
+  /**
    * Method returns the monthly minimum of a specified month
    * 
    * @param month - month to return the minimum of
@@ -155,7 +169,7 @@ public class DataManager {
     return cf.getMonthlyMin(sanitizeMonthInput(month));
   }
 
-  /*
+  /**
    * Method returns the monthly maximum of a specified month
    * 
    * @param month - month to return the maximum of
@@ -166,7 +180,7 @@ public class DataManager {
     return cf.getMonthlyMax(sanitizeMonthInput(month));
   }
 
-  /*
+  /**
    * Method returns the monthly average of a specified farm
    * 
    * @param month, farm - month and farm to return the average of
@@ -177,7 +191,7 @@ public class DataManager {
     return cf.getMonthlyAverageForFarm(sanitizeMonthInput(month), sanitizeFarmInput(farm));
   }
 
-  /*
+  /**
    * Method returns the monthly minimum of a specified farm
    * 
    * @param month, farm - month and farm to return the minimum of
@@ -188,7 +202,7 @@ public class DataManager {
     return cf.getMonthlyMinForFarm(sanitizeMonthInput(month), sanitizeFarmInput(farm));
   }
 
-  /*
+  /**
    * Method returns the monthly maximum of a specified farm
    * 
    * @param month, farm - month and farm to return the maximum of
@@ -199,7 +213,7 @@ public class DataManager {
     return cf.getMonthlyMaxForFarm(sanitizeMonthInput(month), sanitizeFarmInput(farm));
   }
 
-  /*
+  /**
    * Method returns the average of a specified date range
    * 
    * @param start, end - start and end date to return the average of
@@ -210,7 +224,7 @@ public class DataManager {
     return cf.getAverageInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
 
-  /*
+  /**
    * Method returns the minimum of a specified date range
    * 
    * @param start, end - start and end date to return the minimum of
@@ -221,7 +235,7 @@ public class DataManager {
     return cf.getMinInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
 
-  /*
+  /**
    * Method returns the maximum of a specified date range
    * 
    * @param start, end - start and end date to return the maximum of
@@ -232,7 +246,7 @@ public class DataManager {
     return cf.getMaxInDateRange(sanitizeDateInput(start), sanitizeDateInput(end));
   }
 
-  /*
+  /**
    * helper method, improve formatting of input
    * 
    * @param farm - input (farm) to "sanitize"
@@ -263,7 +277,7 @@ public class DataManager {
     throw new IllegalArgumentException("invalid input");
   }
 
-  /*
+  /**
    * helper method, improve formatting of input
    * 
    * @param farm - input (date) to "sanitize"
@@ -287,9 +301,9 @@ public class DataManager {
     }
   }
 
-  /*
+  /**
    * helper method, improve formatting of input
-   * 
+   *  d
    * @param farm - input (month) to "sanitize"
    * 
    * @return - newly formatted input string

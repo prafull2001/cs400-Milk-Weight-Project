@@ -3,7 +3,7 @@ package application;
 import java.util.Collection;
 import java.util.Hashtable;
 
-/*
+/**
  * 
  * @author Dhruv Jain, Shrey Shah, Prafull Sharma, Arkin Katery
  * 
@@ -14,14 +14,26 @@ import java.util.Hashtable;
 public class CheeseFactory {
   private Hashtable<String, Farm> milkDataFromFarms;
   
+  /**
+   * default constructor
+   */
   public CheeseFactory() {
     milkDataFromFarms = new Hashtable<String, Farm>();
   }
   
+  /**
+   * get the total number of farms in the CheeseFactory
+   * @return farms in CheeseFactory
+   */
   public int getNumFarms() {
     return milkDataFromFarms.size();
   }
   
+  /**
+   * get 1 Farm object
+   * @param id FarmID 
+   * @return Farm object with the ID given
+   */
   public Farm get(String id) {
 	  return milkDataFromFarms.get(id);
   }
@@ -49,7 +61,6 @@ public class CheeseFactory {
    * @param data - multiple lines of data to insert in one array, broken up by line
    * @return - true if all datas were successfully added
    */
-
   public boolean insertData(String[] datas) {
     boolean ret = true;
     for(String s: datas) {
@@ -95,7 +106,7 @@ public class CheeseFactory {
     }
   }
   
-  /*
+  /**
    * Method overrides the toString method for the Cheesfactory class and returns elements as strings
    *  
    * @return - farm IDs stored in hashtable
@@ -110,13 +121,12 @@ public class CheeseFactory {
     return sb.toString();
   }
   
-  /*
+  /**
    * Method calculates and returns the monthly average of farms 
    * 
    * @param month - month to calculate the average of
    * @return - the monthly average in the for of a string
    */
-
   public String getMonthlyAverage(String month) {
     Collection<Farm> colF = milkDataFromFarms.values();
     int m = Integer.parseInt(month);
@@ -128,13 +138,12 @@ public class CheeseFactory {
     return Double.toString(Math.round(total/count));
   }
   
-  /*
+  /**
    * Method returns the month with the smallest yield as a string
    * 
    * @param month - month to find the smallest yield of 
    * @return - the name of the month in the form of a String 
    */
-
   public String getMonthlyMin(String month) {
     Collection<Farm> colF = milkDataFromFarms.values();
     int m = Integer.parseInt(month);
@@ -148,7 +157,7 @@ public class CheeseFactory {
     return Integer.toString(min);
   }
   
-  /*
+  /**
    * Method returns the month with the largest yield as a string
    * 
    * @param month - month to find the largest yield of 
@@ -167,7 +176,7 @@ public class CheeseFactory {
     return Integer.toString(max);
   }
   
-  /*
+  /**
    * method returns the monthly average for a farm
    * 
    * @param month, farm - the month as well as the farm ID to calculate the average of 
@@ -177,7 +186,7 @@ public class CheeseFactory {
     return Double.toString(milkDataFromFarms.get(farm).getMonthAverage(Integer.parseInt(month)));
   }
   
-  /*
+  /**
    * method returns the monthly minimum for a farm
    * 
    * @param month, farm - the month as well as the farm ID to calculate the minimum of 
@@ -187,7 +196,7 @@ public class CheeseFactory {
     return Integer.toString(milkDataFromFarms.get(farm).getMin(Integer.parseInt(month)));
   }
   
-  /*
+  /**
    * method returns the monthly maximum for a farm
    * 
    * @param month, farm - the month as well as the farm ID to calculate the maximum of 
@@ -198,7 +207,7 @@ public class CheeseFactory {
   }
   
   
-  /*
+  /**
    * method returns the average weight yield in a specified average
    * 
    * @param start, end - starting and ending date to find average of
@@ -214,7 +223,7 @@ public class CheeseFactory {
     return Double.toString(Math.round(total/count));
   }
   
-  /*
+  /**
    * method returns the minimum weight yield in a specified average
    * 
    * @param start, end - starting and ending date to find minimum of
@@ -232,7 +241,7 @@ public class CheeseFactory {
     return Integer.toString(min);
   }
   
-  /*
+  /**
    * method returns the maximum weight yield in a specified average
    * 
    * @param start, end - starting and ending date to find maximum of

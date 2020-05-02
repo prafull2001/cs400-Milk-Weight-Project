@@ -1,7 +1,7 @@
 package application;
 
 import java.util.ArrayList;
-/*
+/**
  * 
  * @author Dhruv Jain, Shrey Shah, Prafull Sharma, Arkin Katery
  * 
@@ -12,7 +12,7 @@ public class Farm {
   private String farmID;
   private ArrayList<ArrayList<String>> milkWeights;
   
-  /*
+  /**
    * constructor for the Farm class
    * 
    * @param - id for new farm
@@ -25,7 +25,7 @@ public class Farm {
     }
   }
   
-  /*
+  /**
    * method inserts milk data for a specified date
    * 
    * @param data - string input to be parsed then used to input data
@@ -40,7 +40,7 @@ public class Farm {
     return false;
   }
   
-  /*
+  /**
    * method removes milk data for a specified date
    * 
    * @param data - string input to be parsed then used to remove data
@@ -56,7 +56,7 @@ public class Farm {
     }
   }
   
-  /*
+  /**
    * method clears data for the current farm
    * 
    * @return - empty arraylist
@@ -67,7 +67,7 @@ public class Farm {
     return str;
   }
    
-  /*
+  /**
    * helper method for inserting data
    * 
    * @param index, data - index to enter data as well as data to insert
@@ -88,7 +88,7 @@ public class Farm {
   }
   
   @Override
-  /*
+  /**
    * method overrides the toString method for custom output
    * 
    * @return - newly formatted output
@@ -105,7 +105,7 @@ public class Farm {
     return sb.toString();
   }
   
-  /*
+  /**
    * method returns the farm ID
    * 
    * @return - ID of the farm
@@ -114,7 +114,7 @@ public class Farm {
     return farmID;
   }
   
-  /*
+  /**
    * method returns the monthly average of the current farm
    * 
    * @param month - month to find average of 
@@ -133,7 +133,7 @@ public class Farm {
     return Math.round((double)total/count);
   }
   
-  /*
+  /**
    * method returns the monthly min of the current farm
    * 
    * @param month - month to find min of 
@@ -154,7 +154,7 @@ public class Farm {
     return min;
   }
   
-  /*
+  /**
    * method returns the monthly max of the current farm
    * 
    * @param month - month to find max of 
@@ -175,7 +175,7 @@ public class Farm {
     return max;
   }
   
-  /*
+  /**
    * method returns the date range average of the current farm
    * 
    * @param start, end - start and end date to find average of 
@@ -198,7 +198,7 @@ public class Farm {
     return Math.round((double)total/count);
   }
   
-  /*
+  /**
    * method returns the date range min of the current farm
    * 
    * @param start, end - start and end date to find min  of 
@@ -220,7 +220,7 @@ public class Farm {
     return min;
   }
   
-  /*
+  /**
    * method returns the date range max of the current farm
    * 
    * @param start, end - start and end date to find  max of 
@@ -242,7 +242,7 @@ public class Farm {
     return max;
   }
   
-  /*
+  /**
    * helper method to compare dates
    * 
    * @param date1, date2, date3 - dates to compare
