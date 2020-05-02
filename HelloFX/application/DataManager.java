@@ -47,7 +47,6 @@ public class DataManager {
     str = br.readLine();
     while(str!=null) {
       if(checkValidInput(str)) {
-        System.out.println(str);
         cf.insertSingleData(str);
       }
       str = br.readLine();

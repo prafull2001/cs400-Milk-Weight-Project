@@ -301,7 +301,6 @@ public class Main extends Application {
               if (rb1.isSelected()) {
                 try {
                   df.insertData(addDataSplit);
-                  // System.out.println("ADD DATA");
                   addData.setText("Added entry!");
                 } catch (Exception e) {
                   addData.setText("Incorrect format");
@@ -309,11 +308,9 @@ public class Main extends Application {
               } else {
                 try {
                   df.removeData(addDataSplit);
-                  // System.out.println("REMOVE DATA");
                   addData.setText("Removed entry!");
                 } catch (Exception e) {
                   addData.setText("Incorrect format");
-                  e.printStackTrace();
                 }
               }
             }

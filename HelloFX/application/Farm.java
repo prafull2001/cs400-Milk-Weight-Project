@@ -36,7 +36,6 @@ public class Farm {
       int month = Integer.parseInt(data.split(" ")[0].split("-")[1]);
       return insertHelper(month-1, data);
     } catch(Exception e) {
-      e.printStackTrace();
     }
     return false;
   }
@@ -53,7 +52,6 @@ public class Farm {
       milkWeights.get(month).remove(data);
       return data;
     } catch(Exception e) {
-      e.printStackTrace();
       return null;
     }
   }
@@ -81,7 +79,6 @@ public class Farm {
     int i;
     for(i=0; i<arr.size(); i++) {
       if(arr.get(i).split(" ")[0].equals(date)) {
-        System.out.println("called");
         arr.set(i, data);
         return true;
       }
