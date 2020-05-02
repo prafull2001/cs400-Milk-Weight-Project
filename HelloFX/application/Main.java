@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import javafx.application.Application;
 import javafx.collections.*;
-import javafx.collections.FXCollections;
+//import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
@@ -38,8 +38,8 @@ public class Main extends Application {
   // NOTE: this.getParameters().getRaw() will get these also
   private List<String> args;
 
-  private static final int WINDOW_WIDTH = 800;
-  private static final int WINDOW_HEIGHT = 400;
+  private static final int WINDOW_WIDTH = 600;
+  private static final int WINDOW_HEIGHT = 250;
   private static final String APP_TITLE = "MILK WEIGHT PROGRAM";
   // private DataManager df;
   boolean fileLoaded = false;
@@ -55,11 +55,17 @@ public class Main extends Application {
 
     // create info labels
     VBox bottomSection = new VBox();
-    Label min = new Label("minimum: 0");
-    Label avg = new Label("average: 0");
-    Label max = new Label("maximum: 0");
+    Label pre = new Label("");
+    Label min = new Label("");
+    Label avg = new Label("");
+    Label max = new Label("");
     Label farmShare = new Label("");
-    bottomSection.getChildren().addAll(min, avg, max, farmShare);
+//    min.setFont(new Font("Arial", 20));
+//    avg.setFont(new Font("Arial", 20));
+//    max.setFont(new Font("Arial", 20));
+//    farmShare.setFont(new Font("Arial", 20));
+
+    bottomSection.getChildren().addAll(pre, min, avg, max, farmShare);
     bottomSection.setAlignment(Pos.TOP_CENTER);
 
     // LEFT PANE COMPONENTS
@@ -92,18 +98,20 @@ public class Main extends Application {
               if (queryString.equals("Month")) {
                 String thisText = queryDataFarmID.getText();
                 try {
-	                min.setText("minimum: "+df.getMonthlyMinForFarm(other, thisText));
-	                avg.setText("average: "+df.getMonthlyAverageForFarm(other, thisText));
-	                max.setText("maximum: "+df.getMonthlyMaxForFarm(other, thisText));
+                	pre.setText("This farm contributed, in this month:");
+	                min.setText("minimum " + df.getMonthlyMinForFarm(other, thisText)+" units");
+	                avg.setText("average "+df.getMonthlyAverageForFarm(other, thisText)+" units");
+	                max.setText("maximum "+df.getMonthlyMaxForFarm(other, thisText)+" units");
 	                farmShare.setText(String
 	                        .format("%.2f",
-	                            (Double.parseDouble(df.getMonthlyAverageForFarm(thisText, other))
-	                                / Double.parseDouble(df.getMonthlyAverage(thisText))))
-	                        .toString() + "% of total");
-	                if (min.getText().equals("minimum: 2147483647") && 
-	                		max.getText().equals("maximum: 0")) 
+	                                ((Double.parseDouble(df.getMonthlyAverageForFarm(other, thisText)) * 100)
+	                                        / (Double.parseDouble(df.getMonthlyAverage(other)) * df.size())))
+	                        .toString() + "% of total units");
+	                if (min.getText().equals("minimum 2147483647 units") && 
+	                		max.getText().equals("maximum 0 units")) 
 	                	throw new IllegalArgumentException("invalid input");
                 } catch (IllegalArgumentException | NullPointerException e) {
+              	  	pre.setText("");
                 	min.setText("");
                 	avg.setText("");
                 	max.setText("");
@@ -113,12 +121,20 @@ public class Main extends Application {
               } else {
                 try {
                   String[] dateRanges = other.split(",");
-                  min.setText("minimum: "+df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-                  avg.setText("average: "+df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-                  max.setText("maximum: "+df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+                  min.setText("minimum " + df.getMinInDateRange(dateRanges[0], dateRanges[1])+" units");
+                  avg.setText("average " + df.getAverageInDateRange(dateRanges[0], dateRanges[1])+" units");
+                  max.setText("maximum " + df.getMaxInDateRange(dateRanges[0], dateRanges[1])+" units");
                   farmShare.setText("");
+              	  if (min.getText().equals("minimum 2147483647 units") && 
+              			  max.getText().equals("maximum 0 units"))
+              		  throw new IllegalArgumentException("invalid input");
                 } catch (Exception e) {
+              	  pre.setText("");
+                  min.setText("");
+                  avg.setText("");
+                  max.setText("");
                   queryDataTime.setText("Please enter valid input.");
+                  farmShare.setText("");
                 }
               }
             }
@@ -138,23 +154,20 @@ public class Main extends Application {
               if (queryString.equals("Month")) {
                 String thisText = queryDataTime.getText();
                 try {
-                  min.setText("minimum: "+df.getMonthlyMinForFarm(thisText, other));
-                  avg.setText("average: "+df.getMonthlyAverageForFarm(thisText, other));
-                  max.setText("maximum: "+df.getMonthlyMaxForFarm(thisText, other));
-                  farmShare.setText(String
+                	pre.setText("This farm contributed, in this month:");
+                	min.setText("minimum " + df.getMonthlyMinForFarm(thisText, other)+" units");
+                	avg.setText("average " + df.getMonthlyAverageForFarm(thisText, other)+" units");
+                	max.setText("maximum " + df.getMonthlyMaxForFarm(thisText, other)+" units");
+                	farmShare.setText(String
                           .format("%.2f",
                               ((Double.parseDouble(df.getMonthlyAverageForFarm(thisText, other)) * 100)
                                   / (Double.parseDouble(df.getMonthlyAverage(thisText)) * df.size())))
-                          .toString() + "% of total");
-                  System.out.println(df.getMonthlyAverageForFarm(thisText, other));
-                  System.out.println(Double.parseDouble(df.getMonthlyAverageForFarm(thisText, other)));
-                  System.out.println(df.getMonthlyAverage(thisText));
-                  System.out.println(Double.parseDouble(df.getMonthlyAverage(thisText)));
-
-                  if (min.getText().equals("minimum: 2147483647") && 
-	                		max.getText().equals("maximum: 0")) 
+                          .toString() + "% of total units");
+                	if (min.getText().equals("minimum 2147483647 units") && 
+	                		max.getText().equals("maximum 0 units")) 
 	                	throw new IllegalArgumentException("invalid input");
               } catch (IllegalArgumentException | NullPointerException e) {
+            	  pre.setText("");
                   min.setText("");
                   avg.setText("");
                   max.setText("");
@@ -164,12 +177,21 @@ public class Main extends Application {
               } else {
             	  try {
 	                String[] dateRanges = other.split(",");
-	                min.setText("minimum: "+df.getMinInDateRange(dateRanges[0], dateRanges[1]));
-	                avg.setText("average: "+df.getAverageInDateRange(dateRanges[0], dateRanges[1]));
-	                max.setText("maximum: "+df.getMaxInDateRange(dateRanges[0], dateRanges[1]));
+                	pre.setText("This farm contributed, within these dates:");
+	                min.setText("minimum " + df.getMinInDateRange(dateRanges[0], dateRanges[1])+" units");
+	                avg.setText("average " + df.getAverageInDateRange(dateRanges[0], dateRanges[1])+" units");
+	                max.setText("maximum " + df.getMaxInDateRange(dateRanges[0], dateRanges[1])+" units");
 	                farmShare.setText("");
+                	if (min.getText().equals("minimum 2147483647 units") && 
+	                		max.getText().equals("maximum 0 units")) 
+	                	throw new IllegalArgumentException("invalid input");
             	  } catch (Exception e) {
-            		  queryDataTime.setText("Please enter valid input.");
+                	  pre.setText("");
+                      min.setText("");
+                      avg.setText("");
+                      max.setText("");
+                      queryDataTime.setText("Please enter valid input.");
+                      farmShare.setText("");
             	  }
               }
             }
@@ -225,9 +247,27 @@ public class Main extends Application {
                 df = new DataManager(addData.getText());
                 addData.setText("New file loaded!");
                 fileLoaded = true;
+                String curr = query_type.getValue().toString();
+                if (curr.equals("Month"))
+                  queryDataTime.setText("Month (Format: 4)");
+                if (curr.equals("Date Range"))
+                  queryDataTime.setText("Date Range (2020-4-3,2020-12-10)");
+                queryDataFarmID.setText("Farm ID (Farm 32)");
+
               } catch (Exception e) {
                 addData.setText("File not found");
                 fileLoaded = false;
+                String curr = query_type.getValue().toString();
+                if (curr.equals("Month"))
+                  queryDataTime.setText("Month (Format: 4)");
+                if (curr.equals("Date Range"))
+                  queryDataTime.setText("Date Range (2020-4-3,2020-12-10)");
+                queryDataFarmID.setText("Farm ID (Farm 32)");
+          	  	pre.setText("");
+          	  	min.setText("");
+          	  	avg.setText("");
+          	  	max.setText("");
+          	  	farmShare.setText("");
               }
             } else {
               addData.setText("File cannot be removed");
