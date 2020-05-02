@@ -38,8 +38,8 @@ public class Main extends Application {
   private List<String> args;
 
   //window settings
-  private static final int WINDOW_WIDTH = 700;
-  private static final int WINDOW_HEIGHT = 250;
+  private static final int WINDOW_WIDTH = 650;
+  private static final int WINDOW_HEIGHT = 225;
   private static final String APP_TITLE = "MILK WEIGHT PROGRAM";
   
   //class variables used for calculations
@@ -53,8 +53,7 @@ public class Main extends Application {
   public void start(Stage primaryStage) throws Exception {
 	//set initial settings
     args = this.getParameters().getRaw();
-    Label progLabel = new Label("MILK WEIGHT PROGRAM");
-    progLabel.setFont(new Font("Arial", 30));
+    //Hbox
     BorderPane root = new BorderPane();
 
     // create data info labels
@@ -64,6 +63,11 @@ public class Main extends Application {
     Label avg = new Label("");
     Label max = new Label("");
     Label farmShare = new Label("");
+    pre.setFont(new Font("Arial", 17));
+    min.setFont(new Font("Arial", 17));
+    avg.setFont(new Font("Arial", 17));
+    max.setFont(new Font("Arial", 17));
+    farmShare.setFont(new Font("Arial", 17));
     bottomSection.getChildren().addAll(pre, min, avg, max, farmShare);
     bottomSection.setAlignment(Pos.TOP_CENTER);
 
@@ -141,6 +145,7 @@ public class Main extends Application {
                         		  ((df.getFarmAverageinRange(queryDataFarmID.getText(), dateRanges[0], dateRanges[1]) * 100))
                         				  / (Double.parseDouble(df.getAverageInDateRange(dateRanges[0], dateRanges[1])) * df.size()))
                         		  .toString() + "% of total units for the farm selected");
+                  pre.setText("");
                   //if analysis is default values, there is an invalid input
                   if (min.getText().equals("minimum 2147483647 units by all farms in this range")
                           && max.getText().equals("maximum 0 units by all farms in this range"))
@@ -212,6 +217,7 @@ public class Main extends Application {
                         		  ((df.getFarmAverageinRange(queryDataFarmID.getText(), dateRanges[0], dateRanges[1]) * 100))
                         				  / (Double.parseDouble(df.getAverageInDateRange(dateRanges[0], dateRanges[1])) * df.size()))
                         		  .toString() + "% of total units for the farm selected");
+                  pre.setText("");
                   //if analysis is default values, there is an invalid input                  
                   if (min.getText().equals("minimum 2147483647 units by all farms in this range")
                       && max.getText().equals("maximum 0 units by all farms in this range"))
@@ -362,7 +368,6 @@ public class Main extends Application {
 
     //add Hboxes/Vboxes to root
     root.setBottom(bottomSection);
-    root.setTop(progLabel);
     root.setLeft(leftCol);
     root.setCenter(midCol);
     root.setRight(rightCol);
