@@ -58,6 +58,10 @@ public class DataManager {
     catch (IOException e) {}
   }
   
+  public double getFarmAverageinRange(String id, String start, String end) {
+	  return cf.get(sanitizeFarmInput(id)).getAverageInRange(sanitizeDateInput(start), sanitizeDateInput(end));
+  }
+  
   private boolean checkValidInput(String input) {
     try {
       String[] datas = input.split(",");
@@ -107,12 +111,12 @@ public class DataManager {
    */
   public void insertData(String[] data) {
     try {
-      Integer.parseInt(data[3]);
+      Integer.parseInt(data[2]);
     } catch (Exception e) {
       throw new IllegalArgumentException("invalid input");
     }
     cf.insertSingleData(
-        sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
+        sanitizeDateInput(data[0]) + "," + sanitizeFarmInput(data[1]) + "," + data[2]);
   }
 
   /*
@@ -122,12 +126,12 @@ public class DataManager {
    */
   public void removeData(String[] data) {
     try {
-      Integer.parseInt(data[3]);
+      Integer.parseInt(data[2]);
     } catch (Exception e) {
       throw new IllegalArgumentException("invalid input");
     }
     cf.removeSingleData(
-        sanitizeFarmInput(data[0]) + "," + sanitizeDateInput(data[1]) + "," + data[2]);
+        sanitizeDateInput(data[0]) + "," + sanitizeFarmInput(data[1]) + "," + data[2]);
   }
 
   /*

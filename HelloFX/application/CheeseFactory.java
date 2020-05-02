@@ -12,7 +12,7 @@ import java.util.Hashtable;
  *
  */
 public class CheeseFactory {
-  Hashtable<String, Farm> milkDataFromFarms;
+  private Hashtable<String, Farm> milkDataFromFarms;
   
   public CheeseFactory() {
     milkDataFromFarms = new Hashtable<String, Farm>();
@@ -20,6 +20,10 @@ public class CheeseFactory {
   
   public int getNumFarms() {
     return milkDataFromFarms.size();
+  }
+  
+  public Farm get(String id) {
+	  return milkDataFromFarms.get(id);
   }
   
   /**
