@@ -64,6 +64,7 @@ public class CheeseFactory {
    * @return - true if data was inserted successfully
    */
   public boolean insertSingleData(String data) {
+	  /* TODO error handling */
     String[] datas = data.split(",");
     data = datas[0]+" "+datas[2];
     if(milkDataFromFarms.get(datas[1])==null) {

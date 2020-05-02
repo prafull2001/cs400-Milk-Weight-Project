@@ -38,15 +38,34 @@ public class DataManager {
   }
 
   /*
-   * method reads the data of the inputFile
+   * method reads the data of the inputFile and inputs them into cheese factory
    */
-  public void readData(String filePath) throws IOException {
+  public void readInsertData(String filePath) throws IOException {
 	inputFile = new File(filePath);
     BufferedReader br = new BufferedReader(new FileReader(inputFile));
     String str = br.readLine();
     str = br.readLine();
     while(str!=null) {
       cf.insertSingleData(str);
+      str = br.readLine();
+    }
+    try {
+      br.close();
+    } 
+    catch (IOException e) {}
+  }
+  
+  /*
+   * method reads the data of the inputFile and inputs them into cheese factory
+   */
+  public void readRemoveData(String filePath) throws IOException {
+	  /* TODO not working - fix */
+	inputFile = new File(filePath);
+    BufferedReader br = new BufferedReader(new FileReader(inputFile));
+    String str = br.readLine();
+    str = br.readLine();
+    while(str!=null) {
+      cf.removeSingleData(str);
       str = br.readLine();
     }
     try {

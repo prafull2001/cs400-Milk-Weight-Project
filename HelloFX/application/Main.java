@@ -172,7 +172,7 @@ public class Main extends Application {
                   avg.setText("");
                   max.setText("");
                   queryDataTime.setText("Please enter valid input.");
-                  farmShare.setText("");
+                  farmShare.setText(""); /*TODO*/
                 }
               } else {
             	  try {
@@ -191,7 +191,7 @@ public class Main extends Application {
                       avg.setText("");
                       max.setText("");
                       queryDataTime.setText("Please enter valid input.");
-                      farmShare.setText("");
+                      farmShare.setText(""); /*TODO*/
             	  }
               }
             }
@@ -244,7 +244,7 @@ public class Main extends Application {
           if (data_type.getValue().toString().equals("File")) {
             if (rb1.isSelected()) {
               try {
-                df.readData(addData.getText());
+                df.readInsertData(addData.getText());
                 addData.setText("New file loaded!");
                 fileLoaded = true;
                 String curr = query_type.getValue().toString();
@@ -253,12 +253,27 @@ public class Main extends Application {
                 if (curr.equals("Date Range"))
                   queryDataTime.setText("Date Range (2020-4-3,2020-12-10)");
                 queryDataFarmID.setText("Farm ID (Farm 32)");
-
               } catch (Exception e) {
                 addData.setText("File not found");
               }
             } else {
-              addData.setText("File cannot be removed");
+            	try {
+                    df.readRemoveData(addData.getText());
+                    addData.setText("File removed!");
+                    String curr = query_type.getValue().toString();
+                    if (curr.equals("Month"))
+                      queryDataTime.setText("Month (Format: 4)");
+                    if (curr.equals("Date Range"))
+                      queryDataTime.setText("Date Range (2020-4-3,2020-12-10)");
+                    queryDataFarmID.setText("Farm ID (Farm 32)");
+	              	 pre.setText("");
+	                 min.setText("");
+	                 avg.setText("");
+	                 max.setText("");
+	                 farmShare.setText("");
+                  } catch (Exception e) {
+                    addData.setText("File not found");
+                  }
             }
           } else {
             String[] addDataSplit = addData.getText().split(",");
