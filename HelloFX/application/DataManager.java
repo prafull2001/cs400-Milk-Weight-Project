@@ -46,7 +46,10 @@ public class DataManager {
     String str = br.readLine();
     str = br.readLine();
     while(str!=null) {
-      cf.insertSingleData(str);
+      if(checkValidInput(str)) {
+        System.out.println(str);
+        cf.insertSingleData(str);
+      }
       str = br.readLine();
     }
     try {
@@ -55,17 +58,40 @@ public class DataManager {
     catch (IOException e) {}
   }
   
+  private boolean checkValidInput(String input) {
+    try {
+      String[] datas = input.split(",");
+      String date = datas[0];
+      String farmID = datas[1];
+      String weight = datas[2];
+      String[] dates = date.split("-");
+      Integer.parseInt(dates[0]);
+      Integer.parseInt(dates[1]);
+      Integer.parseInt(dates[2]);
+      String[] farms = farmID.split(" ");
+      if(!farms[0].equals("Farm")) {
+        throw new Exception();
+      }
+      Integer.parseInt(farms[1]);
+      Integer.parseInt(weight);
+      return true;
+    } catch(Exception e) {
+      return false;
+    }
+  }
+  
   /*
    * method reads the data of the inputFile and inputs them into cheese factory
    */
   public void readRemoveData(String filePath) throws IOException {
-	  /* TODO not working - fix */
 	inputFile = new File(filePath);
     BufferedReader br = new BufferedReader(new FileReader(inputFile));
     String str = br.readLine();
     str = br.readLine();
     while(str!=null) {
-      cf.removeSingleData(str);
+      if(checkValidInput(str)) {
+        cf.removeSingleData(str);
+      }
       str = br.readLine();
     }
     try {
