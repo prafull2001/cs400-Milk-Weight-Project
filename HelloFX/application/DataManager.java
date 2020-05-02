@@ -25,15 +25,8 @@ public class DataManager {
 
   File inputFile;
   String outputFile;
-  CheeseFactory cf;
+  CheeseFactory cf = new CheeseFactory();
 
-  /*
-   * constructor for DataManager class, initializes the inputFile variable
-   */
-  public DataManager(String filePath) throws IOException {
-    inputFile = new File(filePath);
-    readData();
-  }
 
   /*
    * returns the number of farms in the cheesfactory
@@ -47,11 +40,11 @@ public class DataManager {
   /*
    * method reads the data of the inputFile
    */
-  private void readData() throws IOException {
+  public void readData(String filePath) throws IOException {
+	inputFile = new File(filePath);
     BufferedReader br = new BufferedReader(new FileReader(inputFile));
     String str = br.readLine();
     str = br.readLine();
-    cf = new CheeseFactory();
     while(str!=null) {
       cf.insertSingleData(str);
       str = br.readLine();
