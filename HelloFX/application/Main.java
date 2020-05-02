@@ -38,7 +38,7 @@ public class Main extends Application {
   // NOTE: this.getParameters().getRaw() will get these also
   private List<String> args;
 
-  private static final int WINDOW_WIDTH = 600;
+  private static final int WINDOW_WIDTH = 700;
   private static final int WINDOW_HEIGHT = 250;
   private static final String APP_TITLE = "MILK WEIGHT PROGRAM";
   // private DataManager df;
