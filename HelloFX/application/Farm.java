@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Date;
 /**
  * 
  * @author Dhruv Jain, Shrey Shah, Prafull Sharma, Arkin Katery
@@ -250,6 +251,35 @@ public class Farm {
    * @return true if date 1 is between both values
    */
   private boolean dateCompare(String date1, String date2, String date3) {
-    return date1.compareTo(date2)>=0&&date1.compareTo(date3)<=0;
+    int month1 = Integer.parseInt(date1.split("-")[1]);
+    int day1 = Integer.parseInt(date1.split("-")[2]);
+    int month2 = Integer.parseInt(date1.split("-")[1]);
+    int day2 = Integer.parseInt(date1.split("-")[2]);
+    int month3 = Integer.parseInt(date1.split("-")[1]);
+    int day3 = Integer.parseInt(date1.split("-")[2]);
+    boolean lower=false, higher=false;
+    if(month1>=month2) {
+      lower = true;
+    }
+    else {
+      if(day1>=day2) {
+        lower = true;
+      }
+      else {
+        lower = false;
+      }
+    }
+    if(month1<=month3) {
+      higher = true;
+    }
+    else {
+      if(day1<=day3) {
+        higher = true;
+      }
+      else {
+        higher = false;
+      }
+    }
+    return lower&&higher;
   }
 }

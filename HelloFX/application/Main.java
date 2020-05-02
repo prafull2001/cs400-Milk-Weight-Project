@@ -58,7 +58,7 @@ public class Main extends Application {
 
     // create data info labels
     VBox bottomSection = new VBox();
-    Label pre = new Label("");
+    Label pre = new Label("can only use one calendar year at a time");
     Label min = new Label("");
     Label avg = new Label("");
     Label max = new Label("");
